@@ -26,6 +26,12 @@ class taskController extends Controller
         return view ('admin.task.task', compact('task'));
     }
 
+    public function list()
+    {
+        $id = auth()->user()->id;
+        $task = task::select('id', 'user_id', 'detail', 'keterangan', 'date_due', 'time_due', 'status')->where('user_id', $id)->get();
+        return view ('user.task', compact('task'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -71,7 +77,13 @@ class taskController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = task::select('id', 'user_id', 'task', 'date', 'start_time', 'date_due', 'time_due', 'collect_date', 'collect_time', 'status')->where('date', $id)->get();
+        return view ('admin.task.task-month', compact('task'));    
+    }
+
+    public function download(Request $request,$file)
+    {
+        return response()->download(public_path('task/'.$file));
     }
 
     /**

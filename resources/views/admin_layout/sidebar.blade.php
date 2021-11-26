@@ -47,7 +47,7 @@
         <span>Users</span></a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/task">
+    <a class="nav-link" href="/task_admin">
         <i class="fa fa-tasks"></i>
         <span>Task</span></a>
 </li>
@@ -168,7 +168,7 @@
     </div>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/absensi">
+    <a class="nav-link" href="/task_admin">
         <i class="fa fa-tasks"></i>
         <span>Task</span></a>
 </li>
@@ -183,7 +183,7 @@
         <span>Attendance</span></a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/absensi">
+    <a class="nav-link" href="/task-user">
         <i class="fa fa-tasks"></i>
         <span>Task</span></a>
 </li>
