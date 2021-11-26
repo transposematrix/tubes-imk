@@ -20,12 +20,6 @@ class absensiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function res()
-    {
-        $absensi = absensi::select('id', 'user_id', 'detail', 'date', 'attend_time', 'status')->get();
-        return view ('admin.sekretaris.data-absen', compact('absensi'));
-    }
-
     public function index()
     {
         $absensi = absensi::select('detail', 'date', 'start_time', 'time_due')->distinct()->get();

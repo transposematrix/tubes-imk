@@ -128,3 +128,6 @@ Route::put('/absensi/update/{id}', [absensiController::class, 'update']);
 Route::get('/absensi-user', [absensiController::class, 'list']);
 Route::put('/user/absensi/update/{id}', [absensiController::class, 'userUpdate']);
 Route::get('/absensi/show/{id}', [absensiController::class, 'show']);
+use App\Http\Controllers\taskController;
+Route::get('task', [taskController::class, 'index']);
+Route::post('add_task', [taskController::class, 'store'])->name('add_task');

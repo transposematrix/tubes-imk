@@ -3,6 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Models\task;
+use App\User;
+use Carbon\Carbon;
+use Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 
 class taskController extends Controller
 {
@@ -13,7 +22,8 @@ class taskController extends Controller
      */
     public function index()
     {
-        //
+        $task = task::select('detail', 'date', 'start_time', 'date_due', 'time_due')->distinct()->get();
+        return view ('admin.task.task', compact('task'));
     }
 
     /**
@@ -34,7 +44,23 @@ class taskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $member = user::select('id')->where('levelUser', '!=', "admin")->where('category', '!=', 'alumnee')->get();
+
+ //       $count = DB::table('users')->count();
+
+        foreach($member as $mem){
+            $data=new task();
+   	
+            $data->user_id=$mem->id;
+            $data->detail=$request->title;
+            $data->keterangan = $request->about;
+            $data->date=$request->date;
+            $data->start_time=$request->start_time;
+            $data->date_due = $request->due_date;
+            $data->time_due = $request->time_due;    
+            $data->save();    
+        }
+        return redirect('/task')->with('success', 'Task has been added!');
     }
 
     /**
