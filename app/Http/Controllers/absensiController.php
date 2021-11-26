@@ -85,7 +85,8 @@ class absensiController extends Controller
      */
     public function show($id)
     {
-        //
+        $absensi = absensi::select('id', 'user_id', 'detail', 'date', 'attend_time', 'status')->where('date', $id)->get();
+        return view ('admin.sekretaris.absen-month', compact('absensi'));
     }
 
     /**

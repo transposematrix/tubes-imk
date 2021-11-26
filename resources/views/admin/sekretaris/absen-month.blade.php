@@ -16,16 +16,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                        <div class="dropdown show">
-                            <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Attendance List
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                            </div>                        
+                            <h6 class="m-0 font-weight-bold text-primary">Attendance List</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
