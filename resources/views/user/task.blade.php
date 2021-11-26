@@ -40,10 +40,10 @@
                                             @endif
                                             @if($tas->status == NULL)
                                             <td>    
-                                            <a href="/task_user/update/{{$tas->id}}">Submit Task</a>
+                                            <a href="/task_user/edit/{{$tas->id}}">Submit Task</a>
                                         </td>
                                         @else
-                                        <td><a href="#">Edit Submission</a></td>
+                                        <td><a href="/task/download/{{$tas->task}}">See Submission</a></td>
                                         @endif
                                         </tr>
                                         <div class="modal fade" id="#" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

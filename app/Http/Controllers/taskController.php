@@ -29,7 +29,7 @@ class taskController extends Controller
     public function list()
     {
         $id = auth()->user()->id;
-        $task = task::select('id', 'user_id', 'detail', 'keterangan', 'date_due', 'time_due', 'status')->where('user_id', $id)->get();
+        $task = task::select('id', 'user_id', 'detail', 'task', 'keterangan', 'date_due', 'time_due', 'status')->where('user_id', $id)->get();
         return view ('user.task', compact('task'));
     }
     /**
@@ -94,7 +94,10 @@ class taskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $date_now = Carbon::now()->format('Y-m-d');
+        $time_now = Carbon::now()->format('H:i:m'); 
+        $task = task::findorFail($id);
+        return view('user.submit-task', compact('task', 'date_now', 'time_now'));
     }
 
     /**
@@ -106,7 +109,31 @@ class taskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = task::find($id);
+        if ($request->hasFile('file')){
+            $file=$request->file;        
+            $filename= $file->getClientOriginalName();    
+            $request->file->move(public_path('task'),$filename);
+    
+          } else {
+            $filename = $task->task;
+          }
+
+        if($request->date <= $task->date_due AND $request->time <= $task->time_due){
+            $status = "Submitted on time";
+        }else{
+            $status = "Submitted Late";
+        }
+
+        $task->task = $filename;
+        $task->collect_date = $request->date;
+        $task->collect_time = $request->time;
+        $task->status = $status;
+
+        $task->save();
+
+        return redirect('/task-user')->with('success', 'Your task has been submitted');
+
     }
 
     /**

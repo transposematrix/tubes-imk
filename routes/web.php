@@ -134,3 +134,5 @@ Route::post('add_task', [taskController::class, 'store'])->name('add_task');
 Route::get('/task/show/{id}', [taskController::class, 'show']);
 Route::get('/task/download/{file}',[taskController::class,'download']);
 Route::get('/task-user', [taskController::class, 'list']);
+Route::get('/task_user/edit/{id}', [taskController::class, 'edit']);
+Route::put('/task_user/update/{id}', [taskController::class, 'update'])->name('submit-task');

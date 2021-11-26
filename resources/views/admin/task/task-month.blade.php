@@ -46,7 +46,7 @@
                                             <td>?</td>
                                             @else
                                             <td>{{$tas->status}}</td>
-                                            <td><a href=" class="btn btn-primary btn-sm rounded-0">
+                                            <td><a href="/task/download/{{$tas->task}}" class="btn btn-primary btn-sm rounded-0">
                                                 <i class="fas fa-download"></i>
                                             </a>
                                             @endif
