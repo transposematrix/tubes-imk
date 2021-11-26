@@ -46,6 +46,11 @@
         <i class="fas fa-fw fa-user-circle"></i>
         <span>Users</span></a>
 </li>
+<li class="nav-item">
+    <a class="nav-link" href="/task">
+        <i class="fa fa-tasks"></i>
+        <span>Task</span></a>
+</li>
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
@@ -162,6 +167,11 @@
             <a class="collapse-item" href="/reports">Reports</a>
     </div>
 </li>
+<li class="nav-item">
+    <a class="nav-link" href="/absensi">
+        <i class="fa fa-tasks"></i>
+        <span>Task</span></a>
+</li>
 @endif
 @else
 <div class="sidebar-heading">
@@ -174,7 +184,7 @@
 </li>
 <li class="nav-item">
     <a class="nav-link" href="/absensi">
-        <i class="fa fa-folder"></i>
+        <i class="fa fa-tasks"></i>
         <span>Task</span></a>
 </li>
 

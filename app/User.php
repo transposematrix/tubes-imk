@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\absensi');
     }
+
+    public function task()
+    {
+        return $this->hasMany('App\Models\task');
+    }
 }
