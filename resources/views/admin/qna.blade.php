@@ -5,6 +5,13 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Question and Answer</h1>
+                    <a href="#" data-toggle="modal" data-target="#exampleModal" class="mb-4 btn btn-primary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="text">New Question and Answer</span>
+                            </a>
+
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -16,10 +23,10 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Question</th>
-                                            <th>Answer</th>
-                                            <th>Action</th>
+                                            <th width="5%">No</th>
+                                            <th width="15%">Question</th>
+                                            <th width="25%">Answer</th>
+                                            <th width="10%">Action</th>
                                         </tr>
                                     </thead>
 
@@ -34,6 +41,9 @@
                                             <td>
                                             <a href="" data-toggle="modal" data-target="#updateQna{{$act->id}}" class="btn btn-success btn-sm rounded-0">
                                                 <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm delete-confirm" href="/qna/hapus/{{$act->id}}">
+                                                <i class="fas fa-trash"></i>
                                             </a>
                                             </td>
                                         </tr>
@@ -82,7 +92,42 @@
                         </div>
                     </div>
                 </div>
-								
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+									          <div class="modal-content">
+										        <div class="modal-header">
+										            <button type="button" class="close d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
+											        <span aria-hidden="true" class="ion-ios-close"></span>
+										            </button>
+										        </div>
+										    <div class="modal-body p-4 py-5 p-md-5">
+											    <h3 class="text-center mb-3">Update Qna</h3>
+											    <form action="{{route('add_qna')}}" method="POST" enctype="multipart/form-data" class="signup-form">
+                                                @csrf
+												<div class="form-group mb-2">
+													<label for="name" class="text-secondary">Question</label>
+													<input type="text" name="question" class="form-control" placeholder="Question">
+                                                    @error('question')
+                                                    <small class="text-danger">{{$message}}</small>
+                                                    @enderror
+												</div>
+												<div class="form-group mb-2">
+													<label for="name" class="text-secondary">Answer</label>
+                                                    <textarea class="form-control" name="answer" id="message-text"></textarea>
+                                                    @error('answer')
+                                                    <small class="text-danger">{{$message}}</small>
+                                                    @enderror
+												</div>
+										<br>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                            <button type="submit"  class="btn btn-primary">Save</button>
+                                        </div>
+										</form>
+										</div>
+									  </div>
+									</div>
+								  </div>								
                 <!-- /.container-fluid -->
 @include('sweetalert::alert')
 @endsection

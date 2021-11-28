@@ -8,6 +8,9 @@ use App\Models\letter_in;
 use App\Models\letter_out;
 use App\Models\report;
 use App\User;
+use App\Models\Article;
+use App\Models\Matter;
+use App\Models\Event;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -56,6 +59,11 @@ class HomeController extends Controller
     }
     public function halamanmaster()
     {
-        return view('admin.index');
+        $matter = Matter::count();
+        $article = article::count();
+        $event = event::count();
+        $user = User::where('levelUser', "=", "admin")->count();
+
+        return view('admin.index', compact('matter', 'article', 'event', 'user'));
     }
 }

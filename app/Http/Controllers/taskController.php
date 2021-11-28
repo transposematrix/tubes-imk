@@ -119,10 +119,20 @@ class taskController extends Controller
             $filename = $task->task;
           }
 
-        if($request->date <= $task->date_due AND $request->time <= $task->time_due){
+        if($request->date < $task->date_due){
+            $status= "Submitted on time";
+        }
+        else if(($request->date <= $task->date_due) AND ($request->time <= $task->time_due)){
             $status = "Submitted on time";
-        }else{
+        }
+        else if(($request->date == $task->date_due) AND ($request->time >= $task->time_due)){
             $status = "Submitted Late";
+        }else if(($request->date > $task->date_due) AND ($request->time <= $task->time_due)){
+            $status = "Submitted Late";
+        }else if(($request->date > $task->date_due) AND ($request->time > $task->time_due)){
+            $status = "Submitted Late";
+        }else{
+            ///
         }
 
         $task->task = $filename;

@@ -45,8 +45,18 @@ class qnaController extends Controller
 
     public function store(Request $request)
     {
-        //
-    }
+        request()->validate([
+            'question' => 'required',
+            'answer' => 'required',
+        ]);
+
+        faq::create([
+            'question' => request('question'),
+            'answer' => request ('answer'),
+        ]);
+
+        return redirect('/qna')->with('success', 'QnA has been added'); 
+       }    
 
     /**
      * Display the specified resource.
@@ -93,11 +103,10 @@ class qnaController extends Controller
      */
     public function destroy($id)
     {
-        $data = regulartraining::findorFail($id);
+        $data = faq::findorFail($id);
         $data->delete();
 
         return back();
-
 
     }
 }
