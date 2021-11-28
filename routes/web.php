@@ -138,3 +138,5 @@ Route::get('/task/download/{file}',[taskController::class,'download']);
 Route::get('/task-user', [taskController::class, 'list']);
 Route::get('/task_user/edit/{id}', [taskController::class, 'edit']);
 Route::put('/task_user/update/{id}', [taskController::class, 'update'])->name('submit-task');
+use App\Http\Controllers\OrganizerController;
+Route::get('/structure', [OrganizerController::class, 'list']);

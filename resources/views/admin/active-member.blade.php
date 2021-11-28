@@ -22,6 +22,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>Photo</th>
                                             <th>Name</th>
                                             <th>NIM</th>
                                             <th>USD Batch</th>
@@ -33,6 +34,7 @@
                                     <tbody>
                                         @foreach($member as $mem)
                                         <tr>
+                                            <td><img  src="../user/assets/img/members/{{$mem->photo}}" width="50%"></td>
                                             <td>{{$mem->name}}</td>
                                             <td>{{$mem->nim}}</td>
                                             <td>{{$mem->batch}}</td>
@@ -56,7 +58,7 @@
 										</div>
 										<div class="modal-body p-4 py-5 p-md-5">
 											<h3 class="text-center mb-3">Update Member</h3>
-											<form action="/user/update/{{$mem->id}}" method="POST" class="signup-form">
+											<form action="/user/update/{{$mem->id}}" method="POST" enctype="multipart/form-data" class="signup-form">
                                             {{ csrf_field() }} 
                                             @method('PUT')
 												<div class="form-group mb-2">
@@ -70,6 +72,13 @@
 													<label for="tgl" class="text-secondary">NIM</label>
 													<input type="text" name="nim"  placeholder="NIM" value="{{$mem->nim}}" class="form-control">
                                                     @error('nim')
+                                                    <small class="text-danger">{{$message}}</small>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group mb-2">
+													<label for="tgl" class="text-secondary">Faculty</label>
+													<input type="text" name="faculty"  placeholder="Faculty" value="{{$mem->faculty}}" class="form-control">
+                                                    @error('faculty')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
                                                 </div>
@@ -96,6 +105,16 @@
                                             @enderror
 
                                         </div>
+                                        <input type="text" hidden name="levelUser" value="{{$mem->levelUser}}">
+                                        <input type="text" hidden name="levelAdmin" value="{{$mem->levelAdmin}}">
+                                        <div class="form-group mb-2">
+                                        <label for="photo" class="text-secondary">Member Photo</label>
+                                        <input type="file" name="gambar" id="gambar" accept="image/*">
+                                        @error('gambar')
+                                        <small class="text-danger">{{$message}}</small>
+                                        @enderror
+                                        </span>
+                                        </div>
 										<br>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -107,7 +126,6 @@
 									</div>
 								  </div>
                                         @endforeach
-
                                     </tbody>
                                 </table>
                             </div>
@@ -125,7 +143,7 @@
 										</div>
 										<div class="modal-body p-4 py-5 p-md-5">
 											<h3 class="text-center mb-3">Add Member</h3>
-											<form action="{{route('add_member')}}" method="POST" class="signup-form">
+											<form action="{{route('add_member')}}" method="POST" enctype="multipart/form-data" class="signup-form">
                                                 @csrf
 												<div class="form-group mb-2">
 													<label for="name" class="text-secondary">Full Name</label>
@@ -141,6 +159,13 @@
 													<label for="tgl" class="text-secondary">NIM</label>
 													<input type="text" name="nim"  placeholder="NIM" class="form-control">
                                                     @error('nim')
+                                                    <small class="text-danger">{{$message}}</small>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group mb-2">
+													<label for="tgl" class="text-secondary">Faculty</label>
+													<input type="text" name="faculty"  placeholder="Faculty" class="form-control">
+                                                    @error('faculty')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
                                                 </div>
@@ -167,6 +192,15 @@
                                             @enderror
 
                                         </div>
+                                        <div class="form-group mb-2">
+                                        <label for="photo" class="text-secondary">Member Photo</label>
+                                        <input type="file" name="gambar" id="gambar" accept="image/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+                                        <img id="output"/>
+                                        @error('gambar')
+                                        <small class="text-danger">{{$message}}</small>
+                                        @enderror
+                                        </div>
+
 										<br>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>

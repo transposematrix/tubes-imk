@@ -24,13 +24,13 @@ class UserController extends Controller
 
     public function list()
     {
-        $member = user::select('id', 'name', 'nim', 'batch',  'phone')->where('levelAdmin', '!=', "Master")->where('category', '!=', 'alumnee')->get();
+        $member = user::select('id', 'name', 'nim', 'faculty', 'photo', 'batch', 'levelAdmin', 'levelUser',  'phone')->where('levelAdmin', '!=', "Master")->where('category', '!=', 'alumnee')->get();
         return view ('admin.active-member', compact('member'));    
     }
 
     public function alumnee()
     {
-        $members = user::select('id', 'name', 'nim', 'batch',  'phone')->where('category', '!=', 'active')->get();
+        $members = user::select('id', 'name', 'nim', 'faculty', 'levelAdmin', 'levelUser', 'batch', 'photo',  'phone')->where('category', '!=', 'active')->get();
         return view ('admin.alumnee', compact('members'));    
     }
     /**
@@ -51,19 +51,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'name' => 'required',
-            'nim' => 'required',
-            'batch' => 'required',
-            'category' => 'required',
-            'phone'=>'required'
-        ]);
+        $imageName = time().'.'.$request->gambar->extension();  
+        $request->gambar->move(public_path('user\assets\img\members'), $imageName);
 
         $data=new User();
    	
 
         $data->name=$request->name;
         $data->nim=$request->nim;
+        $data->faculty = $request->faculty;
         $data->batch=$request->batch;
         $data->category=$request->category;
         $data->levelUser = "user";
@@ -71,6 +67,7 @@ class UserController extends Controller
         $data->email = NULL;
         $data->password = NULL;
         $data->phone=$request->phone;
+        $data->photo = $imageName;
 
         $data->save();
         if($request->category == "active"){
@@ -112,19 +109,29 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
           $data = user::find($id);
+
+          if ($request->hasFile('gambar')){
+            $imageName = time().'.'.$request->gambar->extension();  
+            $request->gambar->move(public_path('user\assets\img\members'), $imageName);
+          } else {
+            $imageName = $data->photo;
+          }
+
           $data->name=$request->name;
           $data->nim=$request->nim;
+          $data->faculty = $request->faculty;
           $data->batch=$request->batch;
           $data->category=$request->category;
-          $data->levelUser = "user";
-          $data->levelAdmin = "user";
+          $data->levelUser = $request->levelUser;
+          $data->levelAdmin = $request->levelAdmin;
           $data->phone=$request->phone;
+          $data->photo = $imageName;
   
           $data->save();
           if($request->category == "active"){
               return redirect('/active_member')->with('success', 'Active-member has been Updated!');
           }else{
-              return redirect('/alumnee')->with('sucess', 'Alumnee has been updated!');
+              return redirect('/alumnee')->with('success', 'Alumnee has been updated!');
           }
       }
 
