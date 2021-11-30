@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'nim' => ['required', 'string', 'max:9', 'unique:users'],
             'batch' => ['required', 'string', 'max:4'],
+            'phone' => ['required', 'string', 'max:225'],
             'category' => ['required', 'string', 'max:12'],
             'levelUser'=>['required', 'string', 'max:4'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -74,7 +75,9 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'nim' => $data['nim'],
+            'phone' => ['required', 'string', 'max:225'],
             'batch' => $data['batch'],
+            'phone' => $data['phone'],
             'category' => $data['category'],
             'levelUser'=> $data['levelUser'],
             'levelAdmin'=> "user",

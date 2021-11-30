@@ -71,7 +71,7 @@ class taskController extends Controller
             $data->time_due = $request->time_due;    
             $data->save();    
         }
-        return redirect('/task')->with('success', 'Task has been added!');
+        return redirect('/task_admin')->with('success', 'Task has been added!');
     }
 
     /**

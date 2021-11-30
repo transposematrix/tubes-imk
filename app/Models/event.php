@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class event extends Model
 {
     protected $fillable = [
-        'title', 'gambar', 'content', 'created_at', 'updated_at'
+        'photo', 'created_at', 'updated_at'
     ];}

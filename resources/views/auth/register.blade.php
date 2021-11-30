@@ -107,6 +107,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <input name="phone" type="text" class="form-control form-control-user @error('phone') is-invalid @enderror" value="{{ old('phone') }}" id="exampleInputPhone"
+                                        placeholder="Phone Number">
+                                    @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                
+                                <div class="form-group">
                                     <input name="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" value="{{ old('email') }}" id="exampleInputEmail"
                                         placeholder="Email Address">
                                     @error('email')

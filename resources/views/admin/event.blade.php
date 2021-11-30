@@ -8,7 +8,7 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Event</h1>
-                    <a href="/tambah_event" class="mb-4 btn btn-primary btn-icon-split">
+                    <a href="#" data-toggle="modal" data-target="#exampleModal" class="mb-4 btn btn-primary btn-icon-split">
                         <span class="icon text-white-50">
                             <i class="fas fa-plus"></i>
                         </span>
@@ -47,11 +47,42 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+									  <div class="modal-content">
+										<div class="modal-header">
+										  <button type="button" class="close d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true" class="ion-ios-close"></span>
+										  </button>
+										</div>
+										<div class="modal-body p-4 py-5 p-md-5">
+											<h3 class="text-center mb-3">Add Photo</h3>
+											<form action="{{route('addevent')}}" method="POST" enctype="multipart/form-data" class="signup-form">
+                                                @csrf
+												<div class="form-group mb-2">
+													<label for="tgl" class="text-secondary">Photo</label>
+                                                    <div class="fileinput fileinput-new" data-provides="fileinput" required onchange="">
+                                                        <div id="pratinjauGambar"></div>
+                                                    </div>
+                                                    <br>
+                                                    <input type="file" name="photo" id="gambar" onchange="return validasiFile()">
+                                                    @error('photo')
+                                                    <small class="text-danger">{{$message}}</small>
+                                                    @enderror
+                                                </div>
+										<br>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                            <button type="submit"  class="btn btn-primary">Save</button>
+                                        </div>
+										</form>
+										</div>
+									  </div>
+									</div>
+								  </div>
+                                </div>
+</div>
+</div>
                 <!-- /.container-fluid -->
                 @include('sweetalert::alert')
 @endsection

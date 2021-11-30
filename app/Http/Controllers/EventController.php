@@ -50,19 +50,12 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'judul' => 'required',
-            'content' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
 
-        $imageName = time().'.'.$request->gambar->extension();  
-        $request->gambar->move(public_path('images'), $imageName);
+        $imageName = time().'.'.$request->photo->extension();  
+        $request->photo->move(public_path('user/assets/img/event'), $imageName);
 
         event::create([
-            'title' => request('judul'),
-            'gambar'=>$imageName,
-            'content' => request ('content'),
+            'photo'=>$imageName,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
