@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\report;
+use App\Models\comment;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -19,8 +20,12 @@ class ReportController extends Controller
      */
     public function index()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $reports = report::select('id', 'creator', 'event', 'perihal',  'tgl_laporan', 'file_laporan', 'tgl_pengesahan')->get();
-        return view ('admin.report', compact('reports'));    }
+        return view ('admin.report', compact('numberco', 'comment', 'reports'));    }
 
     /**
      * Show the form for creating a new resource.
@@ -29,7 +34,11 @@ class ReportController extends Controller
      */
     public function create()
     {
-        return view('admin.new-report');
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
+        return view('admin.new-report', compact('numberco', 'comment'));
     }
 
     /**
@@ -89,8 +98,12 @@ class ReportController extends Controller
      */
     public function edit($id)
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $report = report::findorFail($id);
-        return view('admin.update-report', compact('report'));
+        return view('admin.update-report', compact('numberco', 'comment', 'report'));
     }
 
     /**

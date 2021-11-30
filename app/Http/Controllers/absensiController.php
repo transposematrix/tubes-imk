@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Absensi;
 use App\Models\absensi_assignment;
+use App\Models\comment;
 use App\User;
 use Carbon\Carbon;
 use Validator;
@@ -22,8 +23,12 @@ class absensiController extends Controller
      */
     public function index()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $absensi = absensi::select('detail', 'date', 'start_time', 'time_due')->distinct()->get();
-        return view ('admin.sekretaris.data-absen', compact('absensi'));
+        return view ('admin.sekretaris.data-absen', compact('numberco', 'comment','absensi'));
     }
     public function list()
     {
@@ -79,8 +84,12 @@ class absensiController extends Controller
      */
     public function show($id)
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $absensi = absensi::select('id', 'user_id', 'detail', 'date', 'attend_time', 'status')->where('date', $id)->get();
-        return view ('admin.sekretaris.absen-month', compact('absensi'));
+        return view ('admin.sekretaris.absen-month', compact('numberco', 'comment', 'absensi'));
     }
 
     /**

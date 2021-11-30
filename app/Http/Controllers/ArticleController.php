@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\blog;
+use App\Models\comment;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -46,12 +47,18 @@ class ArticleController extends Controller
      */
     public function list()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
         $articles = blog::select('id', 'title', 'photo', 'excerpt',  'article', 'publicate_date')->get();
-        return view ('admin.article', compact('articles'));
+        return view ('admin.article', compact('numberco', 'comment', 'articles'));
     }
     public function create()
     {
-        return view('admin.tambah-article');
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+        return view('admin.tambah-article', compact('numberco', 'comment'));
     }
 
     /**
@@ -107,8 +114,11 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
         $articles = blog::findorFail($id);
-        return view('admin.update-article', compact('articles'));
+        return view('admin.update-article', compact('numberco', 'comment', 'articles'));
     }
 
     /**

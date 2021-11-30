@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Announcement;
+use App\Models\comment;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -18,8 +19,11 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
         $announcement = announcement::select('id', 'title', 'gambar', 'content', 'created_at')->get();
-        return view ('admin.announcement', compact('announcement'));
+        return view ('admin.announcement', compact('numberco', 'comment', 'announcement'));
     }
 
     /**
@@ -29,7 +33,10 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
-        return view('admin.tambah-pengumuman');
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+        return view('admin.tambah-pengumuman', compact('numberco', 'comment'));
     }
 
     /**
@@ -76,8 +83,11 @@ class AnnouncementController extends Controller
      */
     public function edit($id)
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
         $announcement = announcement::findorFail($id);
-        return view('admin.update-pengumuman', compact('announcement'));
+        return view('admin.update-pengumuman', compact('numberco', 'comment', 'announcement'));
     }
 
     /**

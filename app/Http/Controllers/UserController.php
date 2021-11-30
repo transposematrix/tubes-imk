@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\User;
+use App\Models\comment;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -24,14 +25,22 @@ class UserController extends Controller
 
     public function list()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $member = user::select('id', 'name', 'nim', 'faculty', 'photo', 'batch', 'levelAdmin', 'levelUser',  'phone')->where('levelAdmin', '!=', "Master")->where('category', '!=', 'alumnee')->get();
-        return view ('admin.active-member', compact('member'));    
+        return view ('admin.active-member', compact('numberco', 'comment', 'member'));    
     }
 
     public function alumnee()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $members = user::select('id', 'name', 'nim', 'faculty', 'levelAdmin', 'levelUser', 'batch', 'photo',  'phone')->where('category', '!=', 'active')->get();
-        return view ('admin.alumnee', compact('members'));    
+        return view ('admin.alumnee', compact('numberco', 'comment', 'members'));    
     }
     /**
      * Show the form for creating a new resource.
@@ -40,9 +49,13 @@ class UserController extends Controller
      */
     public function create()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $user = user::select('id', 'name', 'email', 'nim', 'faculty', 'levelAdmin', 'levelUser')->where('levelUser', '!=', 'admin')->where('category', '!=', 'alumnee')->get();
         $administrator = user::select('id', 'name', 'email', 'nim', 'faculty', 'levelAdmin', 'levelUser', 'batch', 'photo', 'phone')->where('levelUser', '=', "Admin")->get();
-        return view('admin.user', compact('administrator', 'user'));
+        return view('admin.user', compact('numberco', 'comment', 'administrator', 'user'));
     }
 
     /**

@@ -16,7 +16,13 @@ class commentController extends Controller
      */
     public function index()
     {
-        //
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
+        $comments = comment::select('id', 'name', 'email', 'comment', 'blog_id')->latest()->get();
+        return view('admin.comment', compact('numberco', 'comment', 'comments'));
+
     }
 
     /**

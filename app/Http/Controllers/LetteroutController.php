@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\letter_out;
+use App\Models\comment;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -19,8 +20,11 @@ class LetteroutController extends Controller
      */
     public function index()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
         $letters = letter_out::select('id', 'tanggal_surat', 'penerima', 'klasifikasi',  'perihal', 'lampiran', 'no_surat')->get();
-        return view ('admin.surat-keluar', compact('letters'));    }
+        return view ('admin.surat-keluar', compact('numberco', 'comment', 'letters'));    }
 
     /**
      * Show the form for creating a new resource.
@@ -29,7 +33,10 @@ class LetteroutController extends Controller
      */
     public function create()
     {
-        return view('admin.tambah_surat_keluar');
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+        return view('admin.tambah_surat_keluar', compact('numberco', 'comment'));
     }
 
     /**
@@ -82,8 +89,11 @@ class LetteroutController extends Controller
      */
     public function edit($id)
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
         $letter = letter_out::findorFail($id);
-        return view('admin.update-surat_keluar', compact('letter'));
+        return view('admin.update-surat_keluar', compact('numberco', 'comment', 'letter'));
     }
 
     /**

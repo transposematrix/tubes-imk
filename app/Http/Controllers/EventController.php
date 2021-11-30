@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Event;
+use App\Models\comment;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -19,8 +20,11 @@ class EventController extends Controller
      */
     public function index()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
         $events = event::select('id', 'photo')->get();
-        return view ('admin.event', compact('events'));
+        return view ('admin.event', compact('numberco', 'comment', 'events'));
     }
 
     public function list()

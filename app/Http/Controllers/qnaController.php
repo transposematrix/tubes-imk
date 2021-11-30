@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\faq;
+use App\Models\comment;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -25,8 +26,12 @@ class qnaController extends Controller
 
     public function list()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $qna = faq::select('id', 'question', 'answer')->get();
-        return view ('admin.qna', compact('qna'));
+        return view ('admin.qna', compact('numberco', 'comment', 'qna'));
     }
     /**
      * Show the form for creating a new resource.

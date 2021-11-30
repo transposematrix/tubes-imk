@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\comment;
 
 class AdminController extends Controller
 {
@@ -13,7 +14,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
+        return view('admin.index', compact('numberco', 'comment'));
     }
 
     /**

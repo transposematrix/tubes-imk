@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\task;
 use App\User;
+use App\Models\comment;
 use Carbon\Carbon;
 use Validator;
 use Illuminate\Support\Facades\DB;
@@ -22,8 +23,12 @@ class taskController extends Controller
      */
     public function index()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $task = task::select('detail', 'date', 'start_time', 'date_due', 'time_due')->distinct()->get();
-        return view ('admin.task.task', compact('task'));
+        return view ('admin.task.task', compact('numberco', 'comment', 'task'));
     }
 
     public function list()
@@ -77,8 +82,12 @@ class taskController extends Controller
      */
     public function show($id)
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $task = task::select('id', 'user_id', 'task', 'date', 'start_time', 'date_due', 'time_due', 'collect_date', 'collect_time', 'status')->where('date', $id)->get();
-        return view ('admin.task.task-month', compact('task'));    
+        return view ('admin.task.task-month', compact('numberco', 'comment', 'task'));    
     }
 
     public function download(Request $request,$file)

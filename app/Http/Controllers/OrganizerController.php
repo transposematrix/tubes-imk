@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\organizer;
 use App\Models\position;
+use App\Models\comment;
 use App\User;
 use Validator;
 use Illuminate\Support\Facades\DB;
@@ -41,10 +42,14 @@ class OrganizerController extends Controller
      */
     public function list()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $user = user::select('id', 'name')->where('levelUser', '!=', 'admin')->where('category', '!=', 'alumnee')->get();
         $position = position::select('id', 'position_name')->get();
         $organizer = organizer::select('id', 'user_id', 'position', 'period')->get();
-        return view ('admin.organizer_list', compact('organizer', 'user', 'position'));
+        return view ('admin.organizer_list', compact('numberco', 'comment', 'organizer', 'user', 'position'));
     }
     public function create()
     {
@@ -96,9 +101,7 @@ class OrganizerController extends Controller
      */
     public function edit($id)
     {
-        $kategoris = Kategori::select('id', 'kategori')->get();
-        $articles = Article::findorFail($id);
-        return view('admin.update-article', compact('kategoris', 'articles'));
+//
     }
 
     /**
@@ -110,22 +113,7 @@ class OrganizerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $articles = Article::find($id);
-        $articles->title = $request->judul;
-        if ($request->hasFile('gambar')){
-            $imageName = time().'.'.$request->gambar->extension();  
-            $request->gambar->move(public_path('images'), $imageName);
-          } else {
-            $imageName = $articles->gambar;
-          }
-        $articles->gambar = $imageName;
-        $articles->content = $request->content;
-        $articles->description = $request->description;
-        $articles->kategori_id = $request->kategori;
-        $articles->updated_at = date('Y-m-d H:i:s');
-        $articles->save();
-
-        return redirect('/all_article')->with('success', 'Article has been updated!');
+//
     }
     /**
      * Remove the specified resource from storage.
@@ -135,11 +123,7 @@ class OrganizerController extends Controller
      */
     public function destroy($id)
     {
-        $articles = article::findorFail($id);
-        $articles->delete();
-
-        return back();
-
+//
 
     }
 }

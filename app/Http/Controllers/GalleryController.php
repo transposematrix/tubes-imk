@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\regulartraining;
 use App\Models\gathering;
+use App\Models\comment;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -27,8 +28,11 @@ class GalleryController extends Controller
 
     public function list()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
         $activity = regulartraining::select('id', 'photo', 'title')->get();
-        return view ('admin.activity', compact('activity'));
+        return view ('admin.activity', compact('numberco', 'comment', 'activity'));
     }
     /**
      * Show the form for creating a new resource.
@@ -37,7 +41,10 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        return view ('admin.tambah-rg');
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+        return view ('admin.tambah-rg', compact('numberco', 'comment'));
     }
 
     /**

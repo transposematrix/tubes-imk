@@ -166,3 +166,5 @@ use App\Http\Controllers\achievementController;
 route::get('/achievement', [achievementController::class, 'index'])->name('achievement');
 use App\Http\Controllers\afterGlowController;
 route::get('/afterGlow', [afterGlowController::class, 'index'])->name('afterGlow');
+use App\Http\Controllers\commentController;
+Route::get('/comment', [commentController::class, 'index']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Matter;
+use App\Models\comment;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -30,8 +31,12 @@ class MatterController extends Controller
     }
     public function list()
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $matters = Matter::select('id', 'title', 'gambar', 'description',  'matter', 'created_at')->get();
-        return view ('admin.matter', compact('matters'));
+        return view ('admin.matter', compact('numberco', 'comment', 'matters'));
     }
     /**
      * Show the form for creating a new resource.
@@ -40,7 +45,11 @@ class MatterController extends Controller
      */
     public function create()
     {
-        return view('admin.tambah_matter');
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
+        return view('admin.tambah_matter', compact('numberco', 'comment'));
     }
 
     /**
@@ -65,7 +74,7 @@ class MatterController extends Controller
         $data->matter=$filename;
 
         $imageName = time().'.'.$request->gambar->extension();  
-        $request->gambar->move(public_path('images'), $imageName);
+        $request->gambar->move(public_path('user/assets/img/matter'), $imageName);
 
         $data->title=$request->judul;
         $data->description=$request->description;
@@ -83,8 +92,12 @@ class MatterController extends Controller
      */
     public function show($id)
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $data = Matter::find($id);
-        return view('website/matterDetails', compact('data'));
+        return view('website/matterDetails', compact('numberco', 'comment', 'data'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -94,8 +107,12 @@ class MatterController extends Controller
      */
     public function edit($id)
     {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
         $matters = Matter::findorFail($id);
-        return view('admin.update-matter', compact('matters'));
+        return view('admin.update-matter', compact('numberco', 'comment', 'matters'));
     }
 
     /**
@@ -120,7 +137,7 @@ class MatterController extends Controller
 
         if ($request->hasFile('gambar')){
             $imageName = time().'.'.$request->gambar->extension();  
-            $request->gambar->move(public_path('images'), $imageName);
+            $request->gambar->move(public_path('user/assets/img/matter'), $imageName);
           } else {
             $imageName = $matters->gambar;
           }
