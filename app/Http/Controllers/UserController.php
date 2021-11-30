@@ -40,7 +40,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $administrator = user::select('id', 'name', 'email', 'nim', 'faculty', 'levelAdmin', 'levelUser', 'batch', 'photo', 'phone')->where('levelUser', '=', "Admin")->get();
+        return view('admin.user', compact('administrator'));
     }
 
     /**

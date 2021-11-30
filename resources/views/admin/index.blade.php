@@ -1,3 +1,5 @@
+@section('title')
+<title>USD | Admin</title>
 @extends('admin_layout.main')
 @section('konten')
                 <!-- Begin Page Content -->

@@ -1,4 +1,6 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Frequently Asked Question </title>
 @section('konten')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">

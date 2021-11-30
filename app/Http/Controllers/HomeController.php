@@ -8,7 +8,7 @@ use App\Models\letter_in;
 use App\Models\letter_out;
 use App\Models\report;
 use App\User;
-use App\Models\Article;
+use App\Models\blog;
 use App\Models\Matter;
 use App\Models\Event;
 use Validator;
@@ -35,12 +35,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
-    public function userHome()
-    {
         return view('user.index');
     }
+
     public function halamanketua()
     {
         return view('halaman1');
@@ -60,7 +57,7 @@ class HomeController extends Controller
     public function halamanmaster()
     {
         $matter = Matter::count();
-        $article = article::count();
+        $article = blog::count();
         $event = event::count();
         $user = User::where('levelUser', "=", "admin")->count();
 

@@ -63,7 +63,7 @@ class LoginController extends Controller
                     return redirect()->route('bendahara-dashboard');
                 }
             }else{
-                return redirect()->route('user-home');
+                return redirect()->route('halamanuser');
             }
         }else{
             return redirect()->route('login')

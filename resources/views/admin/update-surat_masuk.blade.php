@@ -1,4 +1,6 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Update Letter In </title>
 @section('konten')
  <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -17,51 +19,51 @@
                             {{ method_field('PUT') }} 
                             <div class="col">
                                 <div class="form-group row">
-                                    <label for="Nomor_surat" class="col-sm-2 col-form-label">Nomor</label>
+                                    <label for="Nomor_surat" class="col-sm-2 col-form-label">Number</label>
                                     <div class="col-sm">
-                                      <input type="text" class="form-control" name="nomor" placeholder="Nomor Surat" value="{{$letter->nomor_surat}}">
+                                      <input type="text" class="form-control" name="nomor" placeholder="Letter Number" value="{{$letter->nomor_surat}}">
                                       @error('judul')
                                         <small class="text-danger">{{$message}}</small>
                                        @enderror
                                     </div>
                                     <div class="col-sm">
-                                        <label for="Tanggal" class="col-md-auto col-form-label">Tanggal Penerimaan Surat</label>
+                                        <label for="Tanggal" class="col-md-auto col-form-label">Letter Acceptance Date</label>
                                     </div>
                                     <div class="col-sm">
                                         <input type="date" class="form-control" value="{{$letter->tanggal_terima}}" name="tgl_masuk">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="Pengirim" class="col-sm-2 col-form-label">Pengirim</label>
+                                    <label for="Pengirim" class="col-sm-2 col-form-label">Sender</label>
                                     <div class="col-sm">
-                                        <input type="text" class="form-control" name="pengirim" value="{{$letter->pengirim}}" placeholder="Nama Pengirim">
+                                        <input type="text" class="form-control" name="pengirim" value="{{$letter->pengirim}}" placeholder="Sender's Name">
                                         @error('pengirim')
                                         <small class="text-danger">{{$message}}</small>
                                        @enderror
                                     </div>
                                     <div class="col-sm">
-                                        <label for="Tanggal_Surat" class="col-md-auto col-form-label">Tanggal Surat </label>
+                                        <label for="Tanggal_Surat" class="col-md-auto col-form-label">Letter Date </label>
                                     </div>
                                     <div class="col-sm">
                                         <input type="date" class="form-control" value="{{$letter->tanggal_surat}}" name="tgl_surat">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="klasifikasi" class="col-sm-2 col-form-label">Klasifikasi Surat</label>
+                                    <label for="klasifikasi" class="col-sm-2 col-form-label">Letter Clasification</label>
                                     <div class="col-sm-10">
                                         <select class="custom-select" name="klasifikasi">
-                                            @if($letter->klasifikasi == 'Pribadi')
-                                            <option value="" disabled>--Klasifikasi Surat--</option>
-                                            <option value="Pribadi" selected>Pribadi</option>
-                                            <option value="Umum">Umum</option>
-                                            @elseif($letter->klasifikasi =='Umum')
-                                            <option value="" disabled>--Klasifikasi Surat--</option>
-                                            <option value="Pribadi">Pribadi</option>
-                                            <option value="Umum" selected>Umum</option>
+                                            @if($letter->klasifikasi == 'Private')
+                                            <option value="" disabled>--Letter Clasification--</option>
+                                            <option value="Private" selected>Private</option>
+                                            <option value="General">General</option>
+                                            @elseif($letter->klasifikasi =='General')
+                                            <option value="" disabled>--Letter Clasification--</option>
+                                            <option value="Private">Private</option>
+                                            <option value="General" selected>General</option>
                                             @else
-                                            <option value="" selected disabled>--Klasifikasi Surat--</option>
-                                            <option value="Pribadi">Pribadi</option>
-                                            <option value="Umum" >Umum</option>
+                                            <option value="" selected disabled>--Letter Clasification--</option>
+                                            <option value="Private">Private</option>
+                                            <option value="General" >General</option>
                                             @endif
                                         </select>
                                         @error('klasifikasi')
@@ -70,16 +72,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="Perihal" class="col-sm-2 col-form-label">Perihal</label>
+                                    <label for="Perihal" class="col-sm-2 col-form-label">About</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="perihal" value="{{$letter->perihal}}" placeholder="Perihal Surat">
+                                        <input type="text" class="form-control" name="perihal" value="{{$letter->perihal}}" placeholder="Letter About">
                                         @error('perihal')
                                         <small class="text-danger">{{$message}}</small>
                                        @enderror
                                     </div>   
                                 </div>
                                 <div class="form-group row">
-                                    <label for="Lampiran" class="col-sm-2 col-form-label">Lampiran</label>
+                                    <label for="Lampiran" class="col-sm-2 col-form-label">File</label>
                                     <div class="col-sm-10">
                                         <input type="file" id="file" name="file" onchange="return validasiFile()">
                                     </div>

@@ -1,4 +1,6 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Active Member </title>
 @section('konten')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -147,7 +149,7 @@
                                                 @csrf
 												<div class="form-group mb-2">
 													<label for="name" class="text-secondary">Full Name</label>
-													<input type="text" name="name" class="form-control" placeholder="Full Name">
+													<input type="text" name="name" class="form-control" placeholder="Full Name" required>
                                                     @error('nama')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
@@ -157,21 +159,21 @@
 												</div>
 												<div class="form-group mb-2">
 													<label for="tgl" class="text-secondary">NIM</label>
-													<input type="text" name="nim"  placeholder="NIM" class="form-control">
+													<input type="text" name="nim"  placeholder="NIM" class="form-control" required>
                                                     @error('nim')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-2">
 													<label for="tgl" class="text-secondary">Faculty</label>
-													<input type="text" name="faculty"  placeholder="Faculty" class="form-control">
+													<input type="text" name="faculty"  placeholder="Faculty" required class="form-control">
                                                     @error('faculty')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
                                                 </div>
 										  <div class="form-group mb-2">
 											<label for="batch" class="text-secondary">USD Batch (ex : 2010)</label>
-											<input type="text" name="batch" class="form-control" placeholder="Batch">
+											<input type="text" name="batch" class="form-control" required placeholder="Batch">
                                             @error('batch')
                                             <small class="text-danger">{{$message}}</small>
                                             @enderror
@@ -186,7 +188,7 @@
                                     </div>									
                                         <div class="form-group mb-2">
 											<label for="contact" class="text-secondary">Phone Number</label>
-											<input type="text" name="phone" class="form-control" placeholder="Phone Number">
+											<input type="text" name="phone" class="form-control" required placeholder="Phone Number">
                                             @error('nama')
                                             <small class="text-danger">{{$message}}</small>
                                             @enderror
@@ -194,7 +196,7 @@
                                         </div>
                                         <div class="form-group mb-2">
                                         <label for="photo" class="text-secondary">Member Photo</label>
-                                        <input type="file" name="gambar" id="gambar" accept="image/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+                                        <input type="file" name="gambar" id="gambar" accept="image/*" required onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
                                         <img id="output"/>
                                         @error('gambar')
                                         <small class="text-danger">{{$message}}</small>

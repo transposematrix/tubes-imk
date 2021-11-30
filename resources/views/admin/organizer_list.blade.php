@@ -1,4 +1,14 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Organizer </title>
+@endsection
+@section('css')
+<style>
+.wrapper{
+width:400px;
+}
+</style>
+@endsection
 @section('konten')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -22,22 +32,22 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Photo</th>
-                                            <th>Name</th>
-                                            <th>Faculty</th>
-                                            <th>USD Batch</th>
-                                            <th>Position</th>
-                                            <th>Period</th>
+                                            <th width="15%">Photo</th>
+                                            <th width="15%">Name</th>
+                                            <th width="15%">Faculty</th>
+                                            <th width="10%">USD Batch</th>
+                                            <th width="15%">Position</th>
+                                            <th width="10%">Period</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         @foreach($organizer as $mem)
                                         <tr>
-                                            <td><img  src="../user/assets/img/members/{{$mem->photos->photo}}" width="50%"></td>
-                                            <td>{{$mem->names->name}}</td>
-                                            <td>{{$mem->faculties->faculty}}</td>
-                                            <td>{{$mem->batches->batch}}</td>
+                                            <td><img  src="../user/assets/img/members/{{$mem->users->photo}}" width="70%"></td>
+                                            <td>{{$mem->users->name}}</td>
+                                            <td>{{$mem->users->faculty}}</td>
+                                            <td>{{$mem->users->batch}}</td>
                                             <td>{{$mem->positions->position_name}}</td>
                                             <td>{{$mem->period}}</td>
                                         </tr>
@@ -61,66 +71,44 @@
 										  </button>
 										</div>
 										<div class="modal-body p-4 py-5 p-md-5">
-											<h3 class="text-center mb-3">Add Member</h3>
-											<form action="{{route('add_member')}}" method="POST" enctype="multipart/form-data" class="signup-form">
+											<h3 class="text-center mb-3">Add Organizer</h3>
+											<form action="{{route('add_organizer')}}" method="POST" enctype="multipart/form-data" class="signup-form">
                                                 @csrf
-												<div class="form-group mb-2">
-													<label for="name" class="text-secondary">Full Name</label>
-													<input type="text" name="name" class="form-control" placeholder="Full Name">
-                                                    @error('nama')
+                                                <div class="wrapper">
+                                                <label for="batch" class="text-secondary">USD Member</label>
+                                                    <select name="user_id" id="" class="form-control custom-select" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                                                    <option value="" selected disabled>--Choose Member--</option>
+                                                    @foreach($user as $us)
+                                                    <option value="{{$us->id}}">{{$us->name}}</option>
+                                                    @endforeach
+                                                    </select>
+                                                    @error('user')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
-                                                    @error('nama')
+                                        </div>           
+                                        <br>                            
+                                        <div class="wrapper">
+                                                <label for="batch" class="text-secondary">USD Position</label>
+                                                    <select name="position" id="" class="form-control custom-select" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                                                    <option value="" selected disabled>--Choose Position--</option>
+                                                    @foreach($position as $pos)
+                                                    <option value="{{$pos->id}}">{{$pos->position_name}}</option>
+                                                    @endforeach
+                                            </select>
+                                            @error('position')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
+                                        </div>           
+                                        <br>
+                                        <div class="form-group mb-2">
+											<label for="period" class="text-secondary">Period</label>
+												<input type="text" name="period" class="form-control" placeholder="Period Year (ex: 2020)">
+                                                @error('period')
+                                                <small class="text-danger">{{$message}}</small>
+                                                @enderror
 												</div>
-												<div class="form-group mb-2">
-													<label for="tgl" class="text-secondary">NIM</label>
-													<input type="text" name="nim"  placeholder="NIM" class="form-control">
-                                                    @error('nim')
-                                                    <small class="text-danger">{{$message}}</small>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group mb-2">
-													<label for="tgl" class="text-secondary">Faculty</label>
-													<input type="text" name="faculty"  placeholder="Faculty" class="form-control">
-                                                    @error('faculty')
-                                                    <small class="text-danger">{{$message}}</small>
-                                                    @enderror
-                                                </div>
-										  <div class="form-group mb-2">
-											<label for="batch" class="text-secondary">USD Batch (ex : 2010)</label>
-											<input type="text" name="batch" class="form-control" placeholder="Batch">
-                                            @error('batch')
-                                            <small class="text-danger">{{$message}}</small>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group mb-2">
-                                        <label for="batch" class="text-secondary">Member's Category</label>
-                                            <select name="category" class="custom-select">
-                                                <option value="" selected disabled>--Choose Category--</option>
-                                                <option value="active">Active</option>
-                                                <option value="alumnee">Alumnee</option>
-                                        </select>
-                                    </div>									
-                                        <div class="form-group mb-2">
-											<label for="contact" class="text-secondary">Phone Number</label>
-											<input type="text" name="phone" class="form-control" placeholder="Phone Number">
-                                            @error('nama')
-                                            <small class="text-danger">{{$message}}</small>
-                                            @enderror
 
-                                        </div>
-                                        <div class="form-group mb-2">
-                                        <label for="photo" class="text-secondary">Member Photo</label>
-                                        <input type="file" name="gambar" id="gambar" accept="image/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
-                                        <img id="output"/>
-                                        @error('gambar')
-                                        <small class="text-danger">{{$message}}</small>
-                                        @enderror
-                                        </div>
-
-										<br>
+                              			<br>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                             <button type="submit"  class="btn btn-primary">Save</button>

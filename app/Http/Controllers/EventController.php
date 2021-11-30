@@ -19,8 +19,13 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = event::select('id', 'title', 'gambar',  'created_at')->get();
+        $events = event::select('id', 'photo')->get();
         return view ('admin.event', compact('events'));
+    }
+
+    public function list()
+    {
+        return view ('website/eventDetail');
     }
 
     /**

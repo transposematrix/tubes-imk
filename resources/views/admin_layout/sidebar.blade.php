@@ -1,7 +1,14 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
+@if(Auth::user()->levelAdmin == 'master')
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('master-dashboard')}}">
+@elseif(Auth::user()->levelUser == 'sekretaris')
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('sekretaris-dashboard')}}">
+@else
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('halamanuser')}}">
+@endif
+
     <div class="sidebar-brand-icon rotate-n-10">
         <img width="30px" src="{{asset('template1/img/usd.jpg')}}">
     </div>
@@ -13,7 +20,13 @@
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item">
-    <a class="nav-link" href="/index">
+@if(Auth::user()->levelAdmin == 'master')
+<a class="nav-link" href="{{route('master-dashboard')}}">
+@elseif(Auth::user()->levelUser == 'sekretaris')
+<a class="nav-link" href="{{route('sekretaris-dashboard')}}">
+@else
+<a class="nav-link" href="{{route('halamanuser')}}">
+@endif
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 </li>
@@ -42,9 +55,9 @@
 </li>
 @if(Auth::user()->levelAdmin == 'master')
 <li class="nav-item">
-    <a class="nav-link" href="/user">
+    <a class="nav-link" href="/users">
         <i class="fas fa-fw fa-user-circle"></i>
-        <span>Users</span></a>
+        <span>Administrators</span></a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="/task_admin">
@@ -83,7 +96,6 @@
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="/all_article">List Article</a>
-            <a class="collapse-item" href="/category">Categories</a>
         </div>
     </div>
 </li>
@@ -110,7 +122,7 @@
         </div>
     </div>
 </li>
-@else(Auth::user()->levelAdmin== 'sekretaris')
+@elseif(Auth::user()->levelAdmin== 'sekretaris')
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
         aria-expanded="true" aria-controls="collapseFive">

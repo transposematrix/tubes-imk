@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\regulartraining;
+use App\Models\gathering;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,9 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //
+        $regulartrainings = regulartraining::orderBy('id', 'DESC')->get();
+        $gatherings = gathering::all();
+        return view("website/regularTraining&Gathering", compact('regulartrainings', 'gatherings'));
     }
 
     public function list()

@@ -1,4 +1,7 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Event </title>
+@endsection
 @section('konten')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -22,9 +25,8 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>No</th>
                                             <th>Thumbnail</th>
-                                            <th>Title</th>
-                                            <th>Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -32,15 +34,11 @@
                                     <tbody>
                                         @foreach($events as $event)
                                         <tr>
+                                            <td>{{$event->id}}</td>
                                             <td>
-                                            <img  src="../images/{{$event->gambar}}" height="100" width="100">
+                                            <img  src="../user/assets/img/event/{{$event->photo}}" height="100" width="100">
                                             </td>
-                                            <td>{{$event->title}}</td>
-                                            <td>{{$event->created_at}}</td>
                                             <td>
-                                            <a href="event/edit/{{$event->id}}" class="btn btn-success btn-sm rounded-0">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
                                             <a class="btn btn-danger btn-sm delete-confirm" href="/event/hapus/{{$event->id}}">
                                                 <i class="fas fa-trash"></i>
                                             </a>

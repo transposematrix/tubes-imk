@@ -8,29 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class organizer extends Model
 {
     protected $fillable = [
-        'name', 'faculty', 'batch', 'photo', 'position', 'period'
+        'user_id', 'position', 'period'
         ];
 
     public $timestamps = false;
 
-    public function faculties()
+    public function users()
     {
-     return $this->belongsTo('App\User', 'faculty');
-    }
-
-    public function names()
-    {
-        return $this->belongsTo('App\User', 'name');
-    }
-
-    public function batches()
-    {
-        return $this->belongsTo('App\User', 'batch');
-    }
-
-    public function photos()
-    {
-        return $this->belongsTo('App\User', 'photo');
+        return $this->belongsTo('App\User', 'user_id');
     }
 
     public function positions()

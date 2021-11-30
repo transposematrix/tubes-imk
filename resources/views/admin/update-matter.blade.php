@@ -1,4 +1,7 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Update Matter </title>
+@endsection
 @section('konten')
  <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -63,7 +66,7 @@
                                             <div class="fileinput fileinput-new" data-provides="fileinput" onchange="">
                                             <img  width ="100%" height="100%" id="pratinjauGambar" src="{{ url('images/'.$matters->gambar)}}">
                                                 </div>
-                                                    <input type="file" name="gambar" id="gambar" onchange="return validasiFile()">
+                                                    <input type="file" name="gambar" accept="image/*" id="gambar" onchange="return validasiFile()">
                                                     @error('gambar')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror

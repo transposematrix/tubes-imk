@@ -1,4 +1,7 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Add Letter Out </title>
+@endsection
 @section('konten')
  <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -16,36 +19,36 @@
                             @csrf
                             <div class="col">
                                 <div class="form-group row">
-                                    <label for="Nomor_surat" class="col-sm-2 col-form-label">Nomor</label>
+                                    <label for="Nomor_surat" class="col-sm-2 col-form-label">Letter Number</label>
                                     <div class="col-sm">
-                                      <input type="text" class="form-control" name="nomor" placeholder="Nomor Surat">
+                                      <input type="text" class="form-control" name="nomor" placeholder="Letter Number" required>
                                       @error('nomor')
                                         <small class="text-danger">{{$message}}</small>
                                        @enderror
                                     </div>
                                     <div class="col-md">
-                                        <label for="Tanggal" class="col-md-auto col-form-label">Tanggal Surat</label>
+                                        <label for="Tanggal" class="col-md-auto col-form-label">Letter Date</label>
                                     </div>
                                     <div class="col-md">
-                                        <input type="date" class="form-control" name="tgl_surat">
+                                        <input type="date" class="form-control" name="tgl_surat" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="Pengirim" class="col-sm-2 col-form-label">Penerima</label>
+                                    <label for="Pengirim" class="col-sm-2 col-form-label">Receiver</label>
                                     <div class="col-sm">
-                                        <input type="text" class="form-control" name="penerima" placeholder="Nama Penerima">
+                                        <input type="text" class="form-control" name="penerima" placeholder="Receiver's Name" required>
                                         @error('penerima')
                                         <small class="text-danger">{{$message}}</small>
                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="klasifikasi" class="col-sm-2 col-form-label">Klasifikasi Surat</label>
+                                    <label for="klasifikasi" class="col-sm-2 col-form-label">Letter Classication</label>
                                     <div class="col-sm-10">
                                         <select class="custom-select" name="klasifikasi">
-                                            <option value="" selected disabled>--Klasifikasi Surat--</option>
-                                            <option value="Pribadi">Pribadi</option>
-                                            <option value="Umum">Umum</option>
+                                            <option value="" selected disabled>--Letter Classification--</option>
+                                            <option value="Private">Private</option>
+                                            <option value="Public">Public</option>
                                         </select>
                                         @error('klasifikasi')
                                         <small class="text-danger">{{$message}}</small>
@@ -53,18 +56,18 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="Perihal" class="col-sm-2 col-form-label">Perihal</label>
+                                    <label for="Perihal" class="col-sm-2 col-form-label">About</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="perihal" placeholder="Perihal Surat">
+                                        <input type="text" class="form-control" name="perihal" placeholder="The Letter About" required>
                                         @error('perihal')
                                         <small class="text-danger">{{$message}}</small>
                                        @enderror
                                     </div>   
                                 </div>
                                 <div class="form-group row">
-                                    <label for="Lampiran" class="col-sm-2 col-form-label">Lampiran</label>
+                                    <label for="Lampiran" class="col-sm-2 col-form-label">File</label>
                                     <div class="col-sm-10">
-                                        <input type="file" id="file" name="file" onchange="return validasiFile()">
+                                        <input type="file" id="file" name="file" required onchange="return validasiFile()">
                                     </div>
                                 </div>
                                 <br>

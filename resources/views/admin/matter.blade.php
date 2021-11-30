@@ -1,4 +1,6 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Matter </title>
 @section('konten')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -34,7 +36,7 @@
                                         @foreach($matters as $mat)
                                         <tr>
                                             <td>
-                                            <img  src="../images/{{$mat->gambar}}" height="100" width="100">
+                                            <img  src="../user/assets/img/matter/{{$mat->gambar}}" height="100" width="100">
                                             </td>
                                             <td>{{$mat->title}}</td>
                                             <td>{{$mat->description}}</td>

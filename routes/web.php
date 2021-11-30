@@ -13,16 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+
+
+use App\Http\Controllers\indexController;
+route::get('/', [indexController::class, 'index'])->name('/');
+
+
+use App\Http\Controllers\registrationController;
+route::get('/registration', [registrationController::class, 'index'])->name('registration');
+
 
 Auth::routes();
 Route::get('logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 use App\Http\Controllers\HomeController;
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('user/home',[HomeController::class, 'userHome'])->name('user-home');
+Route::get('/halamanuser',[HomeController::class, 'index'])->name('halamanuser');
 
 Route::group(['middleware'=>['auth', 'levelAdmin:ketua']],function(){
     Route::get('halaman1',[HomeController::class, 'halamanketua'])->name('ketua-dashboard');
@@ -40,9 +46,7 @@ Route::group(['middleware'=>['auth', 'levelAdmin:master']],function(){
 Route::get('/article', function () {
     return view('admin.article');
 });
-Route::get('/user', function () {
-    return view('admin.user');
-});
+
 Route::get('/active_member', function () {
     return view('admin.active-member');
 });
@@ -51,15 +55,19 @@ Route::get('/schedule', function(){
 });
 
 use App\Http\Controllers\ArticleController;
-Route::resource('article', ArticleController::class);
 Route::get('all_article', [ArticleController::class, 'list'])->name('all_article');
 Route::get('tambah_article', [ArticleController::class, 'create'])->name('tambah_article');
 Route::post('tambah', [ArticleController::class, 'store'])->name('tambah');
 Route::get('/article/hapus/{id}', [ArticleController::class, 'destroy']);
 Route::get('/article/edit/{id}', [ArticleController::class, 'edit']);
 Route::put('/article/update/{id}', [ArticleController::class, 'update']);
+
+route::get('/article', [ArticleController::class, 'index'])->name('article');
+route::get('/articleDetails/{id}', [ArticleController::class, 'articles'])->name('articlePost');
+Route::get('/search', [ArticleController::class, 'search'])->name('search');
+Route::post('/article/{article}/comment', [commentController::class, 'store'])->name('article.comment.store');
+
 use App\Http\Controllers\MatterController;
-Route::resource('matters', MatterController::class);
 Route::get('addmatter', [MatterController::class, 'create'])->name('addmatter');
 Route::post('tambah-matter', [MatterController::class, 'store'])->name('tambah-matter');
 Route::get('all_matter', [MatterController::class, 'list']);
@@ -67,6 +75,10 @@ Route::get('/download/{file}',[MatterController::class,'download']);
 Route::get('/matters/hapus/{id}', [MatterController::class, 'destroy']);
 Route::get('/matters/edit/{id}', [MatterController::class, 'edit']);
 Route::put('/matters/update/{id}', [MatterController::class, 'update']);
+route::get('/matters', [MatterController::class, 'default'])->name('matters');
+route::get('/filesView', [MatterController::class, 'index'])->name('filesView');
+route::get('/files/{id}', [MatterController::class, 'show'])->name('filesNumber');
+
 use App\Http\Controllers\AnnouncementController;
 Route::get('tambah_pengumuman', [AnnouncementController::class, 'create']);
 Route::post('addpengumuman', [AnnouncementController::class, 'store'])->name('addpengumuman');
@@ -81,6 +93,7 @@ Route::get('event', [EventController::class, 'index']);
 Route::get('/event/edit/{id}', [EventController::class, 'edit']);
 Route::put('/event/update/{id}', [EventController::class, 'update']);
 Route::get('/event/hapus/{id}', [EventController::class, 'destroy']);
+route::get('/eventDetail', [eventDetailController::class, 'list'])->name('eventDetail');
 use App\Http\Controllers\LetterController;
 Route::get('new-letter', [LetterController::class, 'create']);
 Route::post('addletter', [LetterController::class, 'store'])->name('addletter');
@@ -112,17 +125,22 @@ Route::get('active_member', [UserController::class, 'list']);
 Route::get('alumnee', [UserController::class, 'alumnee']);
 Route::put('/user/update/{id}', [UserController::class, 'update']);
 Route::get('/user/hapus/{id}', [UserController::class, 'destroy']);
+Route::get('users', [UserController::class, 'create']);
+
 use App\Http\Controllers\GalleryController;
 Route::get('regulartraining', [GalleryController::class, 'list']);
 Route::post('add_rg', [GalleryController::class, 'store'])->name('add_rg');
 Route::put('/rg/update/{id}', [GalleryController::class, 'update']);
 Route::get('/rg/hapus/{id}', [GalleryController::class, 'destroy']);
+route::get('/regularTraining&Gathering', [GalleryController::class, 'index'])->name('regularTraining&Gathering');
+
 use App\Http\Controllers\qnaController;
 Route::get('qna', [qnaController::class, 'list']);
 Route::post('add_qna', [qnaController::class, 'store'])->name('add_qna');
 Route::get('/qna/edit/{id}', [qnaController::class, 'edit']);
 Route::put('/qna/update/{id}', [qnaController::class, 'update']);
 Route::get('/qna/hapus/{id}', [qnaController::class, 'destroy']);
+route::get('/FAQ', [qnaController::class, 'index'])->name('FAQ');
 use App\Http\Controllers\absensiController;
 Route::get('absensi', [absensiController::class, 'index']);
 Route::post('add_absen', [absensiController::class, 'store'])->name('add_absen');
@@ -140,3 +158,9 @@ Route::get('/task_user/edit/{id}', [taskController::class, 'edit']);
 Route::put('/task_user/update/{id}', [taskController::class, 'update'])->name('submit-task');
 use App\Http\Controllers\OrganizerController;
 Route::get('/structure', [OrganizerController::class, 'list']);
+Route::post('add_organizer', [OrganizerController::class, 'store'])->name('add_organizer');
+route::get('/organizationStructure', [OrganizerController::class, 'index'])->name('organizationStructure');
+use App\Http\Controllers\achievementController;
+route::get('/achievement', [achievementController::class, 'index'])->name('achievement');
+use App\Http\Controllers\afterGlowController;
+route::get('/afterGlow', [afterGlowController::class, 'index'])->name('afterGlow');

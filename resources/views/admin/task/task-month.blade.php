@@ -1,5 +1,8 @@
 
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Task</title>
+@endsection
 @section('konten')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">

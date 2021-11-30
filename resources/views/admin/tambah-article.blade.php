@@ -1,4 +1,7 @@
 @extends('admin_layout.main')
+@section('title')
+<title> USD | Add Article </title>
+@endsection
 @section('konten')
  <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -24,8 +27,16 @@
                                              @enderror
                                             </div>
                                     <div class="form-group">
-                                          <label for="excerpt">Description</label>
-                                            <input type="text" placeholder="Enter Description Here" name="description" id="description" class="form-control">
+                                          <label for="excerpt">Sidebar Title</label>
+                                            <input type="text" placeholder="Enter Sidebar Title Here" name="sidebar" id="description" class="form-control">
+                                            @error('description')
+                                            <small class="text-danger">{{$message}}</small>
+                                            @enderror
+                                     </div>
+
+                                    <div class="form-group">
+                                          <label for="excerpt">Excerpt</label>
+                                            <input type="text" placeholder="Enter Excerpt Here" name="description" id="description" class="form-control">
                                             @error('description')
                                             <small class="text-danger">{{$message}}</small>
                                             @enderror
@@ -57,22 +68,6 @@
 
                                     </div>
                                     <div class="card-body">
-                                        <div class="box-header with-border">
-                                        <label for="kategori">Kategori</label>
-                                        </div>
-                                        <div class="box-body">
-                                        <select class="form-control" id="kategori" name="kategori">
-                                            <option selected disabled>Pilih Kategori</option>
-                                            @foreach($kategoris as $kat) 
-                                                    <option value="{{$kat->id}}">{{$kat->kategori}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('kategori')
-                                        <small class="text-danger">{{$message}}</small>
-                                        @enderror
-                                        <br>
-                                        <br>
-                                        </div>
                                     </div>
                                     <div class="card-body">
                                         <label for="thumbnail">Thumbnail</label>
@@ -82,7 +77,7 @@
                                                     <div id="pratinjauGambar">
                                                 </div>
                                                 </div>
-                                                    <input type="file" name="gambar" id="gambar" onchange="return validasiFile()">
+                                                    <input type="file" name="gambar" id="gambar" accept="image/*" onchange="return validasiFile()">
                                                     </span>
                                                     <button type="button" class="btn btn-default fileinput-exists" data-dismiss="fileinput" onclick="hapusGambar()">Remove</button>
                                                 </div>

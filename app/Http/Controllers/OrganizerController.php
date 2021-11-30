@@ -21,7 +21,10 @@ class OrganizerController extends Controller
      */
     public function index()
     {
-        //
+        $tahun21s = organizer::select('id', 'user_id', 'position', 'period')->where('period', '2021')->get();
+        $tahun20s = organizer::select('id', 'user_id', 'position', 'period')->where('period', '2020')->get();
+        $tahun19s = organizer::select('id', 'user_id', 'position', 'period')->where('period', '2019')->get();
+        return view("website/organizationStructure", compact('tahun21s', 'tahun20s', 'tahun19s'));
     }
 
     public function year()
@@ -38,9 +41,9 @@ class OrganizerController extends Controller
      */
     public function list()
     {
-        $user = user::select('id', 'name')->get();
-        $position = position::select('id', 'position_name');
-        $organizer = organizer::select('id', 'name', 'faculty', 'batch',  'photo', 'position', 'period')->get();
+        $user = user::select('id', 'name')->where('levelUser', '!=', 'admin')->where('category', '!=', 'alumnee')->get();
+        $position = position::select('id', 'position_name')->get();
+        $organizer = organizer::select('id', 'user_id', 'position', 'period')->get();
         return view ('admin.organizer_list', compact('organizer', 'user', 'position'));
     }
     public function create()
@@ -57,27 +60,18 @@ class OrganizerController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'judul' => 'required',
-            'content' => 'required',
-            'description' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'user_id' => 'required',
+            'position' => 'required',
+            'period' => 'required',
         ]);
 
-        $imageName = time().'.'.$request->gambar->extension();  
-        $request->gambar->move(public_path('images'), $imageName);
-
-        article::create([
-            'title' => request('judul'),
-            'gambar'=>$imageName,
-            'content' => request ('content'),
-            'description' => request('description'),
-            'kategori_id' => request('kategori'),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-
+        organizer::create([
+            'user_id' => request('user_id'),
+            'position' => request ('position'),
+            'period' => request('period'),
         ]);
 
-        return redirect('/all_article')->with('success', 'Postingan berhasil ditambahkan!'); 
+        return redirect('/structure')->with('success', 'Organizer has been added'); 
        }
 
     /**

@@ -1,4 +1,7 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Regular Training</title>
+@endsection
 @section('konten')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -32,7 +35,7 @@
                                         @foreach($activity as $act)
                                         <tr>
                                             <td>
-                                            <img  src="../images/{{$act->photo}}" height="100" width="100">
+                                            <img  src="../user/assets/img/regularTraining&Gathering/{{$act->photo}}" height="100" width="100">
                                             </td>
                                             <td>{{$act->title}}</td>
                                             <td>
@@ -59,7 +62,7 @@
                                                 @method('PUT')
 												<div class="form-group mb-2">
 													<label for="name" class="text-secondary">Title</label>
-													<input type="text" name="title" value="{{$act->title}}" class="form-control" placeholder="Title">
+													<input type="text" name="title" accept="image/*" value="{{$act->title}}" class="form-control" placeholder="Title">
                                                     @error('title')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
@@ -108,7 +111,7 @@
                                                 @csrf
 												<div class="form-group mb-2">
 													<label for="name" class="text-secondary">Title</label>
-													<input type="text" name="title" class="form-control" placeholder="Title">
+													<input type="text" name="title" accept="image/*" class="form-control" placeholder="Title">
                                                     @error('title')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror

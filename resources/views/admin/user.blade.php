@@ -1,21 +1,24 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | User </title>
+@endsection
 @section('konten')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Users</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Administrators</h1>
                     <a href="#" data-toggle="modal" data-target="#exampleModal" class="mb-4 btn btn-primary btn-icon-split">
                         <span class="icon text-white-50">
                             <i class="fas fa-plus"></i>
                         </span>
-                        <span class="text">Add Users</span>
+                        <span class="text">Add Administrators</span>
                             </a>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">List of All Users</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">List of All Administrators</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -31,11 +34,12 @@
                                     </thead>
 
                                     <tbody>
+                                        @foreach($administrator as $admin)
                                         <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>cedric@gmail.com</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
+                                            <td>{{$admin->name}}</td>
+                                            <td>{{$admin->email}}</td>
+                                            <td>{{$admin->phone}}</td>
+                                            <td>{{$admin->levelAdmin}}</td>
                                             <td>
                                             <a href="#" class="btn btn-success btn-sm rounded-0">
                                                 <i class="fas fa-edit"></i>
@@ -45,23 +49,7 @@
                                             </a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                            Airi Satou
-                                            </td>
-                                            <td>airi@gmail.com</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>
-                                            <a href="#" class="btn btn-success btn-sm rounded-0">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-sm rounded-0">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                            </td>
-                                        </tr>
-
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

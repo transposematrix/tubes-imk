@@ -1,4 +1,7 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Article</title>
+@endsection
 @section('konten')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -24,7 +27,7 @@
                                         <tr>
                                             <th width="10%">Thumbnail</th>
                                             <th width="20%">Title</th>
-                                            <th width="15%">Category</th>
+                                            <th width="15%">Excerpt</th>
                                             <th width="15%">Date</th>
                                             <th width="10%">Action</th>
                                         </tr>
@@ -34,11 +37,11 @@
                                         @foreach($articles as $art)
                                         <tr>
                                             <td>
-                                            <img  src="../images/{{$art->gambar}}" height="100" width="100">
+                                            <img  src="../user/assets/img/blog/{{$art->photo}}" height="100" width="100">
                                             </td>
                                             <td>{{$art->title}}</td>
-                                            <td>{{$art->kategoris->kategori}}</td>
-                                            <td>{{$art->created_at}}</td>
+                                            <td>{{$art->excerpt}}</td>
+                                            <td>{{$art->publicate_date}}</td>
                                             <td>
                                             <a href="#" class="btn btn-primary btn-sm rounded-0">
                                                 <i class="fas fa-eye"></i>

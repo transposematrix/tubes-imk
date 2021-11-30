@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 
 class MatterController extends Controller
 {
+    protected $limit = 5;
     /**
      * Display a listing of the resource.
      *
@@ -19,9 +20,14 @@ class MatterController extends Controller
      */
     public function index()
     {
-        //
+        $file = Matter::paginate($this->limit);
+        return view('website/matterView', compact('file'));
     }
 
+    public function default()
+    {
+        return view ('website/matter');
+    }
     public function list()
     {
         $matters = Matter::select('id', 'title', 'gambar', 'description',  'matter', 'created_at')->get();
@@ -77,9 +83,9 @@ class MatterController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Matter::find($id);
+        return view('website/matterDetails', compact('data'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *

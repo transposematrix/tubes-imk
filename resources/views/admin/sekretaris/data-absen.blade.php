@@ -1,5 +1,8 @@
 
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Attendace </title>
+@endsection
 @section('konten')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">

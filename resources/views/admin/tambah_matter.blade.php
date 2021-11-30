@@ -1,4 +1,7 @@
 @extends('admin_layout.main')
+@section('title')
+<title>Add Matter </title>
+@endsection
 @section('konten')
  <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -18,14 +21,14 @@
                                  <div class="box-body">
                                      <div class="form-group">
                                         <label for="judul">Title</label>
-                                             <input type="text" placeholder="Enter Title here" name="judul" id="judul" class="form-control">
+                                             <input type="text" placeholder="Enter Title here" name="judul" id="judul" class="form-control" required>
                                              @error('judul')
                                              <small class="text-danger">{{$message}}</small>
                                              @enderror
                                             </div>
                                     <div class="form-group">
                                           <label for="excerpt">Description</label>
-                                            <input type="text" placeholder="Enter Description Here" name="description" id="description" class="form-control">
+                                            <input type="text" placeholder="Enter Description Here" name="description" id="description" class="form-control" required>
                                             @error('description')
                                              <small class="text-danger">{{$message}}</small>
                                              @enderror
@@ -33,7 +36,7 @@
                                     <div class="form-group">
                                         <label for="content">Content</label>
                                         <br>
-                                        <input type="file" id="file" name="file" onchange="return validasiPdf()">
+                                        <input type="file" id="file" name="file"  onchange="return validasiPdf()" required>
                                          @error('file')
                                          <small class="text-danger">{{$message}}</small>
                                         @enderror
@@ -63,7 +66,7 @@
                                                     <div id="pratinjauGambar">
                                                 </div>
                                                 </div>
-                                                    <input type="file" name="gambar" id="gambar" onchange="return validasiFile()">
+                                                    <input type="file" name="gambar" id="gambar" accept="image/*" onchange="return validasiFile()" required>
                                                     @error('gambar')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror

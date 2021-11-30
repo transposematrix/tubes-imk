@@ -47,24 +47,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\task');
     }
 
-    public function faculties()
-    {
-     return $this->hasMany('App\Models\organizer');
-    }
-
-    public function names()
+    public function organizer()
     {
         return $this->hasMany('App\Models\organizer');
     }
-
-    public function batches()
-    {
-        return $this->hasMany('App\Models\organizer');
-    }
-
-    public function photos()
-    {
-        return $this->hasMany('App\Models\organizer');
-    }
-
 }

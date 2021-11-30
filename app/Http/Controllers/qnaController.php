@@ -19,7 +19,8 @@ class qnaController extends Controller
      */
     public function index()
     {
-        //
+        $faq = faq::all();
+        return view("website/FAQ", compact('faq'));
     }
 
     public function list()

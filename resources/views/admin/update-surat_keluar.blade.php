@@ -1,4 +1,7 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Update Letter Out </title>
+@endsection
 @section('konten')
  <!-- Begin Page Content -->
 <div class="container-fluid">

@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Models\Article;
-use App\Models\Kategori;
+use App\Models\blog;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 class ArticleController extends Controller
 {
+    protected $limit = 3;
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +19,25 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = blog::paginate($this->limit);
+        $sidebars = blog::orderBy('id', 'DESC')->offset(0)->limit(4)->get();
+        return view('website/article', compact('articles', 'sidebars'));
     }
+
+    public function articles($id)
+    {
+        $articles = blog::findOrFail($id);
+        $sidebars = blog::orderBy('id', 'DESC')->offset(0)->limit(4)->get();
+        return view('website/articleDetails', compact('articles', 'sidebars'));
+    }
+    public function search(Request $request)
+    {
+        $keyword = $request->search;
+        $articles = blog::where('title', 'like', "%" . $keyword . "%")->paginate(3);
+        $sidebars = blog::orderBy('id', 'DESC')->offset(0)->limit(4)->get();
+        return view("website/search", compact('articles', 'sidebars'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -29,13 +46,12 @@ class ArticleController extends Controller
      */
     public function list()
     {
-        $articles = article::select('id', 'title', 'gambar', 'description',  'kategori_id', 'created_at')->get();
+        $articles = blog::select('id', 'title', 'photo', 'excerpt',  'article', 'publicate_date')->get();
         return view ('admin.article', compact('articles'));
     }
     public function create()
     {
-        $kategoris = kategori::select('id', 'kategori')->get();
-        return view ('admin.tambah-article', compact('kategoris'));
+        return view('admin.tambah-article');
     }
 
     /**
@@ -48,20 +64,22 @@ class ArticleController extends Controller
     {
         request()->validate([
             'judul' => 'required',
+            'sidebar'=> 'required',
             'content' => 'required',
             'description' => 'required',
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $imageName = time().'.'.$request->gambar->extension();  
-        $request->gambar->move(public_path('images'), $imageName);
+        $request->gambar->move(public_path('user\assets\img\blog'), $imageName);
 
-        article::create([
+        blog::create([
             'title' => request('judul'),
-            'gambar'=>$imageName,
-            'content' => request ('content'),
-            'description' => request('description'),
-            'kategori_id' => request('kategori'),
+            'sidebar_title' => request('sidebar'),
+            'photo'=>$imageName,
+            'article' => request ('content'),
+            'excerpt' => request('description'),
+            'publicate_date'=>date('Y-m-d'),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
 
@@ -89,9 +107,8 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        $kategoris = Kategori::select('id', 'kategori')->get();
-        $articles = Article::findorFail($id);
-        return view('admin.update-article', compact('kategoris', 'articles'));
+        $articles = blog::findorFail($id);
+        return view('admin.update-article', compact('articles'));
     }
 
     /**
@@ -103,18 +120,18 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $articles = Article::find($id);
+        $articles =blog::find($id);
         $articles->title = $request->judul;
         if ($request->hasFile('gambar')){
             $imageName = time().'.'.$request->gambar->extension();  
-            $request->gambar->move(public_path('images'), $imageName);
+            $request->gambar->move(public_path('user\assets\img\blog'), $imageName);
           } else {
             $imageName = $articles->gambar;
           }
-        $articles->gambar = $imageName;
-        $articles->content = $request->content;
+        $articles->photo = $imageName;
+        $articles->article = $request->content;
         $articles->description = $request->description;
-        $articles->kategori_id = $request->kategori;
+        $articles->sidebar_title = $request->sidebar;
         $articles->updated_at = date('Y-m-d H:i:s');
         $articles->save();
 
@@ -128,7 +145,7 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        $articles = article::findorFail($id);
+        $articles = blog::findorFail($id);
         $articles->delete();
 
         return back();
