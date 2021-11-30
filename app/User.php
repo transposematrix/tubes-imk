@@ -51,4 +51,15 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\organizer');
     }
+
+    public function afterglow()
+    {
+        return $this->hasMany('App\Models\afterglow');
+    }
+
+    public function achievement()
+    {
+        return $this->hasMany('App\Models\achievement');
+    }
+
 }

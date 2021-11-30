@@ -7,25 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class achievement extends Model
 {
-    public function names()
+    protected $fillable = [
+        'users_id', 'competitions_id', 'champion_description'
+        ]; 
+
+    public function users()
     {
-        return $this->belongsTo('App\Models\User', 'name');
-    }
-    public function faculties()
-    {
-        return $this->belongsTo('App\Models\User', 'faculty');
-    }
-    public function batches()
-    {
-        return $this->belongsTo('App\Models\User', 'batch');
-    }
-    public function photos()
-    {
-        return $this->belongsTo('App\Models\User', 'photo');
+        return $this->belongsTo('App\User', 'users_id');
     }
     public function competitions()
     {
-        return $this->belongsTo('App\Models\competition', 'competition');
+        return $this->belongsTo('App\Models\competition', 'competitions_id');
     }
 
 }

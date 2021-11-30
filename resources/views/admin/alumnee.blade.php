@@ -46,7 +46,7 @@
                                             <a href="#" data-toggle="modal" data-target="#updateUser{{$mem->id}}" class="btn btn-success btn-sm rounded-0">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a class="btn btn-danger btn-sm delete-confirm" href="/user/hapus/{{$mem->id}}">
+                                            <a class="btn btn-danger btn-sm delete-confirm" href="/users/hapus/{{$mem->id}}">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                             </td>
@@ -61,7 +61,7 @@
 										</div>
 										<div class="modal-body p-4 py-5 p-md-5">
                                         <h3 class="text-center mb-3">Update Member</h3>
-											<form action="/user/update/{{$mem->id}}" method="POST" enctype="multipart/form-data" class="signup-form">
+											<form action="/users/update/{{$mem->id}}" method="POST" enctype="multipart/form-data" class="signup-form">
                                             {{ csrf_field() }} 
                                             @method('PUT')
 												<div class="form-group mb-2">

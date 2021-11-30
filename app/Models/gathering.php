@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class gathering extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'photo', 'title'
+    ];
+    public $timestamps = false;
 }

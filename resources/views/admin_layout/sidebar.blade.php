@@ -74,8 +74,9 @@
     <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="/regulartraining">Regular Training</a>
-            <a class="collapse-item" href="cards.html">After Glow</a>
-            <a class="collapse-item" href="cards.html">Hall Of Fame</a>
+            <a class="collapse-item" href="/afterglow-admin">After Glow</a>
+            <a class="collapse-item" href="/achievement-admin">Hall Of Fame</a>
+            <a class="collapse-item" href="/gathering-admin">Gathering</a>
         </div>
     </div>
 </li>
@@ -132,8 +133,9 @@
     <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="/regulartraining">Regular Training</a>
-            <a class="collapse-item" href="cards.html">After Glow</a>
-            <a class="collapse-item" href="cards.html">Hall Of Fame</a>
+            <a class="collapse-item" href="/afterglow-admin">After Glow</a>
+            <a class="collapse-item" href="/achievement-admin">Hall Of Fame</a>
+            <a class="collapse-item" href="/gathering-admin">Gathering</a>
         </div>
     </div>
 </li>
@@ -150,7 +152,7 @@
 <li class="nav-item">
     <a class="nav-link" href="/absensi">
         <i class="fa fa-check-square"></i>
-        <span>Absensi</span></a>
+        <span>Attendance</span></a>
 </li>
 
 <li class="nav-item">

@@ -26,6 +26,19 @@ class AnnouncementController extends Controller
         return view ('admin.announcement', compact('numberco', 'comment', 'announcement'));
     }
 
+    public function announcementUser($id)
+    {
+        $announcement = announcement::findOrFail($id);
+        $sidebars = announcement::orderBy('id', 'DESC')->offset(0)->limit(4)->get();
+        return view('user.announcementDetails', compact('announcement', 'sidebars'));
+
+    }
+
+    public function list()
+    {
+        $announcement = announcement::select('id', 'title', 'gambar', 'content', 'created_at')->latest()->get();
+        return view ('user.announcement', compact('announcement'));
+    }
     /**
      * Show the form for creating a new resource.
      *

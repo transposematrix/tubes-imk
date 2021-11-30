@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\achievement;
+use App\Models\competition;
+use App\Models\comment;
+use App\User;
+use Illuminate\Http\Request;
 
-class achievementController extends Controller
+class AchievementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,6 +16,16 @@ class achievementController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        
+        $competition = competition::with('competitions_id');
+        return view('admin.achievement', compact('competition'));
+
+        $user = User::with('users_id');
+        return view('admin.achievement', compact('user'));
+    }
+
+    public function achievementList()
     {
         $noved21s = achievement::where('competitions_id', '1')->get();
         $aurgumentum_open21s = achievement::where('competitions_id', '2')->get();
@@ -34,8 +47,21 @@ class achievementController extends Controller
         $nudc18s = achievement::where('competitions_id', '30')->get();
         $mapdo18s = achievement::where('competitions_id', '31')->get();
         return view("website/achievement", compact('noved21s', 'aurgumentum_open21s', 'agat21s', 'usu_open21s', 'purpose_uph21s', 'aeo21s', 'ived21s', 'melbourne_mini20s', 'bdrt20s', 'idea20s', 'love_comp20s', 'alsa20s', 'meme20s', 'nudc19s', 'mbpdo19s', 'seo19s', 'pro18s', 'nudc18s', 'mapdo18s'));
-    }
 
+    }
+    public function list()
+    {
+        $limit = 5;
+        $numberco = comment::count();
+        $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
+
+        $user = user::select('id', 'name')->where('category', '!=', 'alumnee')->get();
+        $competition = competition::select('id','competition_name')->get();
+
+
+        $achievement = achievement::select('id', 'users_id', 'champion_description','competitions_id')->get();
+        return view ('admin.achievement', compact('numberco', 'comment', 'achievement','user','competition'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -43,7 +69,9 @@ class achievementController extends Controller
      */
     public function create()
     {
-        //
+        {
+            return view ('admin.tambah-ac');
+        }
     }
 
     /**
@@ -54,7 +82,15 @@ class achievementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+
+        achievement::create([
+            'users_id' => request('user_id'),
+            'competitions_id' => request ('competition'),
+            'champion_description' => request('champion_description'),
+        ]);
+
+        return redirect('/achievement-admin')->with('success', 'Achievement has been added'); 
     }
 
     /**
@@ -88,7 +124,14 @@ class achievementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = achievement::find($id);
+        $data->users_id = $request->user_id;
+        $data->competitions_id = $request->competition;
+        $data->champion_description = $request->champion_description;
+
+        $data->save();
+
+        return redirect('/achievement-admin')->with('success', 'Achievement has been updated!');
     }
 
     /**
@@ -99,6 +142,10 @@ class achievementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = achievement::findorFail($id);
+        $data->delete();
+
+        return back();
+
     }
 }

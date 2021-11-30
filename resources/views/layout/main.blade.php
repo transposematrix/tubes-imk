@@ -123,11 +123,11 @@
                                     <div class="header-right-btn d-none d-lg-block ml-20">
                                     @if(Auth::check())
                                           @if(Auth::user()->levelAdmin == 'master')
-                                          <a href="{{route('master-dashboard')}}" class="btn header-btn">Hai {{Auth::user()->name}}</a>
+                                          <a href="{{route('master-dashboard')}}" class="btn header-btn">Hi, {{Auth::user()->name}}!</a>
                                           @elseif(Auth::user()->levelAdmin == 'sekretaris')
-                                          <a href="{{route('sekretaris-dashboard')}}" class="btn header-btn">>Hai {{Auth::user()->name}}</a>
+                                          <a href="{{route('sekretaris-dashboard')}}" class="btn header-btn">Hi, {{Auth::user()->name}}!</a>
                                           @else
-                                          <a href="{{route('user-home')}}" class="btn header-btn">>Hai {{Auth::user()->name}}</a>
+                                          <a href="{{route('halamanuser')}}" class="btn header-btn">Hi, {{Auth::user()->name}}!</a>
                                           @endif
                                         @else
                                         <a href="{{route('login')}}" class="btn header-btn">Login</a>
