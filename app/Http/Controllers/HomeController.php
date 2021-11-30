@@ -11,6 +11,9 @@ use App\User;
 use App\Models\blog;
 use App\Models\Matter;
 use App\Models\Event;
+use App\Models\task;
+use App\Models\absensi;
+use App\Models\announcement;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -35,7 +38,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('user.index');
+        $id = auth()->user()->id;
+        $absensi = absensi::where('user_id', $id)->count();
+        $task = task::where('user_id', $id)->count();
+        $announcement = announcement::count();
+        return view('user.index', compact('absensi', 'task', 'announcement'));
     }
 
     public function halamanketua()

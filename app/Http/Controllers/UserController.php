@@ -40,8 +40,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        $user = user::select('id', 'name', 'email', 'nim', 'faculty', 'levelAdmin', 'levelUser')->where('levelUser', '!=', 'admin')->where('category', '!=', 'alumnee')->get();
         $administrator = user::select('id', 'name', 'email', 'nim', 'faculty', 'levelAdmin', 'levelUser', 'batch', 'photo', 'phone')->where('levelUser', '=', "Admin")->get();
-        return view('admin.user', compact('administrator'));
+        return view('admin.user', compact('administrator', 'user'));
     }
 
     /**
@@ -99,7 +100,36 @@ class UserController extends Controller
     {
         //
     }
+    public function storeAdmin(Request $request)
+    {
+          $id = $request->user_id;
+          $data = user::find($id);
+          if($request->level == 'master' OR $request->level == 'sekretaris'){
+              $data->levelUser = "admin";
+          }else{
+              $data->levelUser = "user";
+          }
+          $data->levelAdmin = $request->level;
+  
+          $data->save();
+            return redirect('/users')->with('success', 'Administrator has been Added!');
+          
+      }
 
+    public function updateAdmin(Request $request, $id)
+    {
+          $data = user::find($id);
+          if($request->level == 'master' OR $request->level == 'sekretaris'){
+              $data->levelUser = "admin";
+          }else{
+              $data->levelUser = "user";
+          }
+          $data->levelAdmin = $request->level;
+  
+          $data->save();
+            return redirect('/users')->with('success', 'Administrator has been updated!');
+          
+      }
     /**
      * Update the specified resource in storage.
      *

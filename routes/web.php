@@ -126,6 +126,8 @@ Route::get('alumnee', [UserController::class, 'alumnee']);
 Route::put('/user/update/{id}', [UserController::class, 'update']);
 Route::get('/user/hapus/{id}', [UserController::class, 'destroy']);
 Route::get('users', [UserController::class, 'create']);
+Route::put('/admin/update/{id}', [UserController::class, 'updateAdmin']);
+Route::post('add_admin', [UserController::class, 'storeAdmin'])->name('add_admin');
 
 use App\Http\Controllers\GalleryController;
 Route::get('regulartraining', [GalleryController::class, 'list']);
