@@ -103,19 +103,19 @@
 										            </button>
 										        </div>
 										    <div class="modal-body p-4 py-5 p-md-5">
-											    <h3 class="text-center mb-3">Update Qna</h3>
+											    <h3 class="text-center mb-3">AddQna</h3>
 											    <form action="{{route('add_qna')}}" method="POST" enctype="multipart/form-data" class="signup-form">
                                                 @csrf
 												<div class="form-group mb-2">
 													<label for="name" class="text-secondary">Question</label>
-													<input type="text" name="question" class="form-control" placeholder="Question">
+													<input type="text" name="question" class="form-control" placeholder="Question" required>
                                                     @error('question')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
 												</div>
 												<div class="form-group mb-2">
 													<label for="name" class="text-secondary">Answer</label>
-                                                    <textarea class="form-control" name="answer" id="message-text"></textarea>
+                                                    <textarea class="form-control" name="answer" id="message-text" required></textarea>
                                                     @error('answer')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror

@@ -21,7 +21,7 @@
                                 <div class="form-group row">
                                     <label for="Creator" class="col-sm-2 col-form-label">Creator</label>
                                     <div class="col-sm">
-                                      <input type="text" class="form-control" name="creator" placeholder="Creator's Name">
+                                      <input type="text" class="form-control" name="creator" placeholder="Creator's Name" required>
                                       @error('creator')
                                         <small class="text-danger">{{$message}}</small>
                                        @enderror
@@ -30,13 +30,13 @@
                                         <label for="Tanggal" class="col-md-auto col-form-label">Report's Date</label>
                                     </div>
                                     <div class="col-sm">
-                                        <input type="date" class="form-control" name="tgl_laporan">
+                                        <input type="date" class="form-control" name="tgl_laporan" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="event" class="col-sm-2 col-form-label">Event</label>
                                     <div class="col-sm">
-                                        <input type="text" class="form-control" name="event" placeholder="Event's Name">
+                                        <input type="text" class="form-control" name="event" placeholder="Event's Name" required>
                                         @error('event')
                                         <small class="text-danger">{{$message}}</small>
                                        @enderror
@@ -51,7 +51,7 @@
                                 <div class="form-group row">
                                     <label for="Perihal" class="col-sm-2 col-form-label">About</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="perihal" placeholder="About the report">
+                                        <input type="text" class="form-control" name="perihal" placeholder="About the report" required>
                                         @error('perihal')
                                         <small class="text-danger">{{$message}}</small>
                                        @enderror
@@ -60,7 +60,7 @@
                                 <div class="form-group row">
                                     <label for="Lampiran" class="col-sm-2 col-form-label">Report's File</label>
                                     <div class="col-sm-10">
-                                        <input type="file" id="file" name="file" onchange="return validasiFile()">
+                                        <input type="file" id="file" name="file" onchange="return validasiFile()" required>
                                     </div>
                                 </div>
                                 <br>

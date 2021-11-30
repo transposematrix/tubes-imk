@@ -126,11 +126,11 @@ class ArticleController extends Controller
             $imageName = time().'.'.$request->gambar->extension();  
             $request->gambar->move(public_path('user\assets\img\blog'), $imageName);
           } else {
-            $imageName = $articles->gambar;
+            $imageName = $articles->photo;
           }
         $articles->photo = $imageName;
         $articles->article = $request->content;
-        $articles->description = $request->description;
+        $articles->excerpt = $request->description;
         $articles->sidebar_title = $request->sidebar;
         $articles->updated_at = date('Y-m-d H:i:s');
         $articles->save();

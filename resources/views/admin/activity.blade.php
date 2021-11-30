@@ -111,14 +111,14 @@
                                                 @csrf
 												<div class="form-group mb-2">
 													<label for="name" class="text-secondary">Title</label>
-													<input type="text" name="title" accept="image/*" class="form-control" placeholder="Title">
+													<input type="text" name="title" accept="image/*" class="form-control" required placeholder="Title">
                                                     @error('title')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
 												</div>
 												<div class="form-group mb-2">
 													<label for="tgl" class="text-secondary">Photo</label>
-                                                    <div class="fileinput fileinput-new" data-provides="fileinput" onchange="">
+                                                    <div class="fileinput fileinput-new" data-provides="fileinput" required onchange="">
                                                         <div id="pratinjauGambar"></div>
                                                     </div>
                                                     <br>
