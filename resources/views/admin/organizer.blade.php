@@ -61,14 +61,14 @@
                                             {{ csrf_field() }} 
 												<div class="form-group mb-2">
 													<label for="name" class="text-secondary">Task Title</label>
-													<input type="text" name="title" class="form-control" placeholder="Task Detail">
+													<input type="text" name="title" class="form-control" placeholder="Task Detail" required>
                                                     @error('title')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
 												</div>
                                                 <div class="form-group mb-2">
 													<label for="name" class="text-secondary">About Task</label>
-													<textarea name="about" class="form-control"></textarea>
+													<textarea name="about" class="form-control" required></textarea>
                                                     @error('about')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror

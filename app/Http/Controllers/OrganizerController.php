@@ -46,7 +46,7 @@ class OrganizerController extends Controller
         $numberco = comment::count();
         $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
 
-        $user = user::select('id', 'name')->where('levelUser', '!=', 'admin')->where('category', '!=', 'alumnee')->get();
+        $user = user::select('id', 'name')->where('category', '!=', 'alumnee')->orderBy('name', 'ASC')->get();
         $position = position::select('id', 'position_name')->get();
         $organizer = organizer::select('id', 'user_id', 'position', 'period')->get();
         return view ('admin.organizer_list', compact('numberco', 'comment', 'organizer', 'user', 'position'));

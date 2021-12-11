@@ -1,4 +1,7 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Achievement</title>
+@endsection
 @section('css')
 <style>
 .wrapper{

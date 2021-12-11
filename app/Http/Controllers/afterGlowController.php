@@ -47,7 +47,7 @@ class AfterglowController extends Controller
         $numberco = comment::count();
         $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
 
-        $user = user::select('id', 'name')->where('category', '!=', 'alumnee')->get();
+        $user = user::select('id', 'name')->where('category', '!=', 'alumnee')->orderBy('name', 'ASC')->get();
         $competition = competition::select('id','competition_name')->get();
 
         $afterglow = afterglow::select('id', 'users_id', 'group_name','competitions_id')->get();

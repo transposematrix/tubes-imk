@@ -65,7 +65,6 @@ Route::put('/article/update/{id}', [ArticleController::class, 'update']);
 route::get('/article', [ArticleController::class, 'index'])->name('article');
 route::get('/articleDetails/{id}', [ArticleController::class, 'articles'])->name('articlePost');
 Route::get('/search', [ArticleController::class, 'search'])->name('search');
-Route::post('/article/{article}/comment', [commentController::class, 'store'])->name('article.comment.store');
 
 use App\Http\Controllers\MatterController;
 Route::get('addmatter', [MatterController::class, 'create'])->name('addmatter');
@@ -167,6 +166,8 @@ Route::post('add_organizer', [OrganizerController::class, 'store'])->name('add_o
 route::get('/organizationStructure', [OrganizerController::class, 'index'])->name('organizationStructure');
 use App\Http\Controllers\commentController;
 Route::get('/comment', [commentController::class, 'index']);
+Route::post('/article/{article}/comment', [commentController::class, 'store'])->name('article.comment.store');
+Route::get('/comment/hapus/{id}', [commentController::class, 'destroy']);
 
 use App\Http\Controllers\GatheringController;
 Route::get('gathering-admin', [GatheringController::class, 'list']);

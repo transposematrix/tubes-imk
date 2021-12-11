@@ -54,7 +54,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'nim' => ['required', 'string', 'max:9', 'unique:users'],
+            'nim' => ['required', 'string', 'max:9'],
             'batch' => ['required', 'string', 'max:4'],
             'phone' => ['required', 'string', 'max:225'],
             'category' => ['required', 'string', 'max:12'],
@@ -70,11 +70,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function updateOrCreate(array $data)
     {
-        return User::create([
+        return User::updateOrCreate(
+            [
+                'nim' => $data['nim']
+            ],
+            [
             'name' => $data['name'],
-            'nim' => $data['nim'],
             'phone' => ['required', 'string', 'max:225'],
             'batch' => $data['batch'],
             'phone' => $data['phone'],
@@ -93,7 +96,7 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
 
-        event(new Registered($user = $this->create($request->all())));
+        event(new Registered($user = $this->updateOrCreate($request->all())));
 
         return $request->wantsJson()
                     ? new JsonResponse([], 201)

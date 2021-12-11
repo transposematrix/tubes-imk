@@ -8,13 +8,14 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Announcement</h1>
+                    @if(Auth::user()->levelAdmin == 'master')
                     <a href="/tambah_pengumuman" class="mb-4 btn btn-primary btn-icon-split">
                         <span class="icon text-white-50">
                             <i class="fas fa-plus"></i>
                         </span>
                         <span class="text">Add Announcement</span>
                             </a>
-
+                    @endif
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -42,6 +43,7 @@
                                             <td>{{$an->title}}</td>
                                             <td>{!! $an->content !!}</td>
                                             <td>{{$an->created_at}}</td>
+                                            @if(Auth::user()->levelAdmin == 'master')
                                             <td>
                                             <a href="announcement/edit/{{$an->id}}" class="btn btn-success btn-sm rounded-0">
                                                 <i class="fas fa-edit"></i>
@@ -50,6 +52,13 @@
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                             </td>
+                                            @else
+                                            <td>
+                                            <a href="announcementDetails/{{$an->id}}" class="btn btn-success btn-sm rounded-0">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            </td>
+                                            @endif
                                         </tr>
                                         @endforeach
                         

@@ -71,42 +71,42 @@
                                             {{ csrf_field() }} 
 												<div class="form-group mb-2">
 													<label for="name" class="text-secondary">Task Title</label>
-													<input type="text" name="title" class="form-control" placeholder="Task Detail">
+													<input type="text" name="title" class="form-control" placeholder="Task Detail" required>
                                                     @error('title')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
 												</div>
                                                 <div class="form-group mb-2">
 													<label for="name" class="text-secondary">About Task</label>
-													<textarea name="about" class="form-control"></textarea>
+													<textarea name="about" class="form-control" required></textarea>
                                                     @error('about')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
 												</div>
 												<div class="form-group mb-2">
 													<label for="tgl" class="text-secondary">Date</label>
-													<input type="date" name="date" class="form-control">
+													<input type="date" name="date" class="form-control" required>
                                                     @error('date')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
 												</div>
 										  <div class="form-group mb-2">
 											<label for="batch" class="text-secondary">Time Start</label>
-											<input type="time" name="start_time" class="form-control" placeholder="Batch">
+											<input type="time" name="start_time" class="form-control" placeholder="Batch" required>
                                             @error('start_time')
                                             <small class="text-danger">{{$message}}</small>
                                             @enderror
 										</div>
                                         <div class="form-group mb-2">
 													<label for="tgl" class="text-secondary">Date</label>
-													<input type="date" name="due_date" class="form-control">
+													<input type="date" name="due_date" class="form-control" required>
                                                     @error('due_date')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
 												</div>
                                         <div class="form-group mb-2">
                                         <label for="batch" class="text-secondary">Time Due</label>
-                                        <input type="time" name="time_due" class="form-control" placeholder="Batch">
+                                        <input type="time" name="time_due" class="form-control" placeholder="Batch" required>
                                         @error('time_due')
                                         <small class="text-danger">{{$message}}</small>
                                         @enderror

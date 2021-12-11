@@ -116,7 +116,7 @@
                                                 @csrf
                                                 <div class="wrapper">
                                                 <label for="batch" class="text-secondary">USD Member</label>
-                                                    <select name="user_id" id="" class="form-control custom-select" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                                                    <select name="user_id" id="" class="form-control custom-select" required onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                                                     <option value="" selected disabled>--Choose Member--</option>
                                                     @foreach($user as $us)
                                                     <option value="{{$us->id}}">{{$us->name}}</option>
@@ -128,7 +128,7 @@
                                         </div>           
                                         <br>                            
                                         <label for="batch" class="text-secondary">Level </label>
-                                            <select name="level" class="custom-select">
+                                            <select name="level" class="custom-select" required>
                                                 <option value="master">Master</option>
                                                 <option value="sekretaris">Sekretaris</option>
                                                 <option value="user" selected>User</option>

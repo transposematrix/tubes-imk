@@ -1,4 +1,14 @@
 @extends('admin_layout.main')
+@section('title')
+<title>USD | Afterglow</title>
+@endsection
+@section('css')
+<style>
+.wrapper{
+width:400px;
+}
+</style>
+@endsection
 @section('konten')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -127,12 +137,12 @@
 										  </button>
 										</div>
 										<div class="modal-body p-4 py-5 p-md-5">
-											<h3 class="text-center mb-3">Add Organizer</h3>
+											<h3 class="text-center mb-3">Add Afterglow</h3>
 											<form action="{{route('add_ag')}}" method="POST" enctype="multipart/form-data" class="signup-form">
                                                 @csrf
                                                 <div class="wrapper">
                                                 <label for="batch" class="text-secondary">USD Member</label>
-                                                    <select name="user_id" id="" class="form-control custom-select" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                                                    <select name="user_id" id="" class="form-control custom-select" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' required>
                                                     <option value="" selected disabled>--Choose Member--</option>
                                                     @foreach($user as $us)
                                                     <option value="{{$us->id}}">{{$us->name}}</option>
@@ -145,7 +155,7 @@
                                         <br>                            
                                         <div class="wrapper">
                                                 <label for="batch" class="text-secondary">USD Competition</label>
-                                                    <select name="competition" id="" class="form-control custom-select" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                                                    <select name="competition" id="" class="form-control custom-select" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' required>
                                                     <option value="" selected disabled>--Choose Competition--</option>
                                                     @foreach($competition as $com)
                                                     <option value="{{$com->id}}">{{$com->competition_name}}</option>
@@ -158,7 +168,7 @@
                                         <br>
                                         <div class="form-group mb-2">
 											<label for="group_name" class="text-secondary">Group Name</label>
-												<input type="text" name="group_name" class="form-control" placeholder="Group Name">
+												<input type="text" name="group_name" class="form-control" placeholder="Group Name" required>
                                                 @error('group_name')
                                                 <small class="text-danger">{{$message}}</small>
                                                 @enderror

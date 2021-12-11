@@ -3,7 +3,7 @@
 <!-- Sidebar - Brand -->
 @if(Auth::user()->levelAdmin == 'master')
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('master-dashboard')}}">
-@elseif(Auth::user()->levelUser == 'sekretaris')
+@elseif(Auth::user()->levelAdmin == 'sekretaris')
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('sekretaris-dashboard')}}">
 @else
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('halamanuser')}}">
@@ -22,7 +22,7 @@
 <li class="nav-item">
 @if(Auth::user()->levelAdmin == 'master')
 <a class="nav-link" href="{{route('master-dashboard')}}">
-@elseif(Auth::user()->levelUser == 'sekretaris')
+@elseif(Auth::user()->levelAdmin == 'sekretaris')
 <a class="nav-link" href="{{route('sekretaris-dashboard')}}">
 @else
 <a class="nav-link" href="{{route('halamanuser')}}">
@@ -191,6 +191,11 @@
 <div class="sidebar-heading">
     Main Menu
 </div>
+<li class="nav-item">
+    <a class="nav-link" href="/announcement">
+        <i class="fas fa-fw fa-bullhorn"></i>
+        <span>Announcement</span></a>
+</li>
 <li class="nav-item">
     <a class="nav-link" href="/absensi-user">
         <i class="fa fa-check-square"></i>

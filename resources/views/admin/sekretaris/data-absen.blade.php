@@ -69,28 +69,28 @@
                                             {{ csrf_field() }} 
 												<div class="form-group mb-2">
 													<label for="name" class="text-secondary">Attendance Detail</label>
-													<input type="text" name="detail" class="form-control" placeholder="Attendance Detail">
+													<input type="text" name="detail" class="form-control" required placeholder="Attendance Detail">
                                                     @error('detail')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
 												</div>
 												<div class="form-group mb-2">
 													<label for="tgl" class="text-secondary">Date</label>
-													<input type="date" name="date" class="form-control">
+													<input type="date" name="date" class="form-control" required>
                                                     @error('date')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
 												</div>
 										  <div class="form-group mb-2">
 											<label for="batch" class="text-secondary">Time Start</label>
-											<input type="time" name="start_time" class="form-control" placeholder="Batch">
+											<input type="time" name="start_time" class="form-control" placeholder="Batch" required>
                                             @error('start_time')
                                             <small class="text-danger">{{$message}}</small>
                                             @enderror
 										</div>
                                         <div class="form-group mb-2">
                                         <label for="batch" class="text-secondary">Time Due</label>
-                                        <input type="time" name="time_due" class="form-control" placeholder="Batch">
+                                        <input type="time" name="time_due" class="form-control" placeholder="Batch" required>
                                         @error('time_due')
                                         <small class="text-danger">{{$message}}</small>
                                         @enderror

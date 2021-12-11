@@ -29,7 +29,7 @@ class UserController extends Controller
         $numberco = comment::count();
         $comment = comment::select('name', 'email', 'comment', 'blog_id', 'created_at')->take($limit)->latest()->get();
 
-        $member = user::select('id', 'name', 'nim', 'faculty', 'photo', 'batch', 'levelAdmin', 'levelUser',  'phone')->where('levelAdmin', '!=', "Master")->where('category', '!=', 'alumnee')->get();
+        $member = user::select('id', 'name', 'nim', 'faculty', 'photo', 'batch', 'levelAdmin', 'levelUser',  'phone')->where('name', '!=', "Atikah Husna")->where('category', '!=', 'alumnee')->get();
         return view ('admin.active-member', compact('numberco', 'comment', 'member'));    
     }
 
@@ -190,5 +190,6 @@ class UserController extends Controller
         $data = user::findorFail($id);
         $data->delete();
 
-        return back();    }
+        return back();   
+     }
 }

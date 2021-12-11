@@ -21,14 +21,14 @@
                                  <div class="box-body">
                                      <div class="form-group">
                                         <label for="judul">Title</label>
-                                             <input type="text" placeholder="Enter Title here" name="judul" id="judul" class="form-control">
+                                             <input type="text" placeholder="Enter Title here" name="judul" id="judul" class="form-control" required>
                                              @error('judul')
                                              <small class="text-danger">{{$message}}</small>
                                              @enderror
                                             </div>
                                     <div class="form-group">
                                           <label for="excerpt">Sidebar Title</label>
-                                            <input type="text" placeholder="Enter Sidebar Title Here" name="sidebar" id="description" class="form-control">
+                                            <input type="text" placeholder="Enter Sidebar Title Here" name="sidebar" id="description" class="form-control" required>
                                             @error('description')
                                             <small class="text-danger">{{$message}}</small>
                                             @enderror
@@ -36,14 +36,14 @@
 
                                     <div class="form-group">
                                           <label for="excerpt">Excerpt</label>
-                                            <input type="text" placeholder="Enter Excerpt Here" name="description" id="description" class="form-control">
+                                            <input type="text" placeholder="Enter Excerpt Here" name="description" id="description" class="form-control" required>
                                             @error('description')
                                             <small class="text-danger">{{$message}}</small>
                                             @enderror
                                      </div>
                                     <div class="form-group">
                                         <label for="content">Content</label>
-                                         <textarea name="content" id="content_article"  cols="40" rows="10" class="form-control"></textarea>
+                                         <textarea name="content" id="content_article"  cols="40" rows="10" class="form-control" required></textarea>
                                          @error('content')
                                          <smal class="text-danger">{{$message}}</small>
                                          @enderror
@@ -77,7 +77,7 @@
                                                     <div id="pratinjauGambar">
                                                 </div>
                                                 </div>
-                                                    <input type="file" name="gambar" id="gambar" accept="image/*" onchange="return validasiFile()">
+                                                    <input type="file" name="gambar" id="gambar" accept="image/*" required onchange="return validasiFile()">
                                                     </span>
                                                     <button type="button" class="btn btn-default fileinput-exists" data-dismiss="fileinput" onclick="hapusGambar()">Remove</button>
                                                 </div>

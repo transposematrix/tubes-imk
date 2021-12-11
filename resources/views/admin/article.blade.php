@@ -43,7 +43,7 @@
                                             <td>{{$art->excerpt}}</td>
                                             <td>{{$art->publicate_date}}</td>
                                             <td>
-                                            <a href="#" class="btn btn-primary btn-sm rounded-0">
+                                            <a href="/articleDetails/{{$art->id}}" class="btn btn-primary btn-sm rounded-0">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             <a href="/article/edit/{{$art->id}}" class="btn btn-success btn-sm rounded-0">
@@ -73,13 +73,13 @@
         const href=$(this).attr('href')
 
         Swal.fire({
-        title: 'Yakin ingin menghapus?',
-        text: "Perubahan tidak dapat dikembalikan!",
+        title: 'Are you sure?',
+        text: "The data won't be reverted anymore!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Hapus!'
+        confirmButtonText: 'Delete!'
         }).then((result) => {
         if (result.value) {
              document.location.href = href;

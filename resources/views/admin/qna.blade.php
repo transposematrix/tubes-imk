@@ -25,7 +25,6 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th width="5%">No</th>
                                             <th width="15%">Question</th>
                                             <th width="25%">Answer</th>
                                             <th width="10%">Action</th>
@@ -35,9 +34,7 @@
                                     <tbody>
                                         @foreach($qna as $act)
                                         <tr>
-                                            <td>
-                                            {{$act->id}}
-                                            </td>
+                                            
                                             <td>{{$act->question}}</td>
                                             <td>{{$act->answer}}</td>
                                             <td>
@@ -103,7 +100,7 @@
 										            </button>
 										        </div>
 										    <div class="modal-body p-4 py-5 p-md-5">
-											    <h3 class="text-center mb-3">AddQna</h3>
+											    <h3 class="text-center mb-3">Add Qna</h3>
 											    <form action="{{route('add_qna')}}" method="POST" enctype="multipart/form-data" class="signup-form">
                                                 @csrf
 												<div class="form-group mb-2">

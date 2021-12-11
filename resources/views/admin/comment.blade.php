@@ -64,13 +64,13 @@
         const href=$(this).attr('href')
 
         Swal.fire({
-        title: 'Yakin ingin menghapus?',
-        text: "Perubahan tidak dapat dikembalikan!",
+        title: 'Are you sure?',
+        text: "The data won't be reverted anymore!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Hapus!'
+        confirmButtonText: 'Delete!'
         }).then((result) => {
         if (result.value) {
              document.location.href = href;

@@ -65,7 +65,7 @@
                                                         <div id="pratinjauGambar"></div>
                                                     </div>
                                                     <br>
-                                                    <input type="file" name="photo" id="gambar" onchange="return validasiFile()">
+                                                    <input type="file" name="photo" id="gambar" required onchange="return validasiFile()">
                                                     @error('photo')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror

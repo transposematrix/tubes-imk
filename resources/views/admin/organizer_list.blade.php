@@ -76,7 +76,7 @@ width:400px;
                                                 @csrf
                                                 <div class="wrapper">
                                                 <label for="batch" class="text-secondary">USD Member</label>
-                                                    <select name="user_id" id="" class="form-control custom-select" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                                                    <select name="user_id" id="" class="form-control custom-select" required onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                                                     <option value="" selected disabled>--Choose Member--</option>
                                                     @foreach($user as $us)
                                                     <option value="{{$us->id}}">{{$us->name}}</option>
@@ -89,7 +89,7 @@ width:400px;
                                         <br>                            
                                         <div class="wrapper">
                                                 <label for="batch" class="text-secondary">USD Position</label>
-                                                    <select name="position" id="" class="form-control custom-select" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                                                    <select name="position" id="" class="form-control custom-select" required onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                                                     <option value="" selected disabled>--Choose Position--</option>
                                                     @foreach($position as $pos)
                                                     <option value="{{$pos->id}}">{{$pos->position_name}}</option>
@@ -102,7 +102,7 @@ width:400px;
                                         <br>
                                         <div class="form-group mb-2">
 											<label for="period" class="text-secondary">Period</label>
-												<input type="text" name="period" class="form-control" placeholder="Period Year (ex: 2020)">
+												<input type="text" name="period" class="form-control" required placeholder="Period Year (ex: 2020)">
                                                 @error('period')
                                                 <small class="text-danger">{{$message}}</small>
                                                 @enderror

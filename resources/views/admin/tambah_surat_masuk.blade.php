@@ -21,7 +21,7 @@
                                 <div class="form-group row">
                                     <label for="Nomor_surat" class="col-sm-2 col-form-label">Number</label>
                                     <div class="col-sm">
-                                      <input type="text" class="form-control" name="nomor" placeholder="Letter Number">
+                                      <input type="text" class="form-control" name="nomor" required placeholder="Letter Number">
                                       @error('nomor')
                                         <small class="text-danger">{{$message}}</small>
                                        @enderror
@@ -30,13 +30,13 @@
                                         <label for="Tanggal" class="col-md-auto col-form-label">Letter Acceptance Date</label>
                                     </div>
                                     <div class="col-sm">
-                                        <input type="date" class="form-control" name="tgl_masuk">
+                                        <input type="date" class="form-control" required name="tgl_masuk">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="Pengirim" class="col-sm-2 col-form-label">Sender</label>
                                     <div class="col-sm">
-                                        <input type="text" class="form-control" name="pengirim" placeholder="Sender's Name">
+                                        <input type="text" class="form-control" name="pengirim" required placeholder="Sender's Name">
                                         @error('pengirim')
                                         <small class="text-danger">{{$message}}</small>
                                        @enderror
@@ -45,13 +45,13 @@
                                         <label for="Tanggal_Surat" class="col-md-auto col-form-label">Letter Date</label>
                                     </div>
                                     <div class="col-sm">
-                                        <input type="date" class="form-control" name="tgl_surat">
+                                        <input type="date" class="form-control" name="tgl_surat" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="klasifikasi" class="col-sm-2 col-form-label">Letter Clasification</label>
                                     <div class="col-sm-10">
-                                        <select class="custom-select" name="klasifikasi">
+                                        <select class="custom-select" name="klasifikasi" required>
                                             <option value="" selected disabled>--Letter Clasification--</option>
                                             <option value="Private">Private</option>
                                             <option value="Public">Public</option>
@@ -64,7 +64,7 @@
                                 <div class="form-group row">
                                     <label for="Perihal" class="col-sm-2 col-form-label">About</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="perihal" placeholder="Letter About">
+                                        <input type="text" class="form-control" name="perihal" required placeholder="Letter About">
                                         @error('perihal')
                                         <small class="text-danger">{{$message}}</small>
                                        @enderror
@@ -73,7 +73,7 @@
                                 <div class="form-group row">
                                     <label for="Lampiran" class="col-sm-2 col-form-label">File</label>
                                     <div class="col-sm-10">
-                                        <input type="file" id="file" name="file" onchange="return validasiFile()">
+                                        <input type="file" id="file" name="file" required onchange="return validasiFile()">
                                     </div>
                                 </div>
                                 <br>
