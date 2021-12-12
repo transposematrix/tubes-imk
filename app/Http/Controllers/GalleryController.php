@@ -62,7 +62,7 @@ class GalleryController extends Controller
         ]);
 
         $imageName = time().'.'.$request->photo->extension();  
-        $request->photo->move(public_path('images'), $imageName);
+        $request->photo->move(public_path('user/assets/img/regularTraining&Gathering'), $imageName);
 
         regulartraining::create([
             'photo'=>$imageName,
@@ -103,7 +103,7 @@ class GalleryController extends Controller
 
         if ($request->hasFile('photo')){
             $imageName = time().'.'.$request->photo->extension();  
-            $request->photo->move(public_path('images'), $imageName);
+            $request->photo->move(public_path('user/assets/img/regularTraining&Gathering'), $imageName);
           } else {
             $imageName = $data->gambar;
           }

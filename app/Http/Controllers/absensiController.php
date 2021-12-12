@@ -127,7 +127,7 @@ class absensiController extends Controller
             $data->attend_time = $request->attend_time;    
             $data->save();
   
-            return redirect('/absensi-user');
+            return redirect('/absensi-user')->with('success', 'Absensi has been changed!');
         }
   
 

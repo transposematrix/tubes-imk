@@ -73,7 +73,7 @@
                                                         <div id="pratinjauGambar"></div>
                                                     </div>
                                                     <br>
-                                                    <input type="file" name="photo" id="gambar" value="{{$act->photo}}" onchange="return validasiFile()">
+                                                    <input type="file" name="photo" id="gambar" accept="image/*">
                                                     @error('photo')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
@@ -122,7 +122,7 @@
                                                         <div id="pratinjauGambar"></div>
                                                     </div>
                                                     <br>
-                                                    <input type="file" name="photo" id="gambar" onchange="return validasiFile()">
+                                                    <input type="file" name="photo" id="gambar" accept="image/*">
                                                     @error('photo')
                                                     <small class="text-danger">{{$message}}</small>
                                                     @enderror
